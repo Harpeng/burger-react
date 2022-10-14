@@ -9,5 +9,11 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+
+.page__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
 }

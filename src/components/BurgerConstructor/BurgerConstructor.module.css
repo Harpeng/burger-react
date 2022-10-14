@@ -1,0 +1,41 @@
+.burgerConstructor {
+    max-width: 600px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.itemsBar {
+    align-items: center;
+    max-height: 656px;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+}
+
+.itemUnlock {
+    max-height: 464px;
+    overflow-y: scroll;
+}
+
+.order {
+
+}
+
+.logo {
+
+}
