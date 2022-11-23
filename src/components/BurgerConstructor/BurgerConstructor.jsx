@@ -7,7 +7,6 @@ import {
   Button,
   ConstructorElement,
   CurrencyIcon,
-  LockIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -15,8 +14,8 @@ function BurgerConstructor({ data }) {
   return (
     <section className={`${styles.burgerConstructor}`}>
       <div className={styles.itemsBar}>
-        <ul className={`${styles.list} mt-25 mb-4 ml-4 mr-4`}>
-          {data?.map((item) => {
+        <ul className={`${styles.list} mt-25 ml-4 mr-4`}>
+          {data.map((item) => {
             if (item._id === "60666c42cc7b410027a1a9b1") {
               return (
                 <li key={item._id} className={`${styles.item} ml-8`}>
@@ -33,8 +32,8 @@ function BurgerConstructor({ data }) {
           })}
         </ul>
         <ul className={`${styles.list} ${styles.itemUnlock} ml-4 mr-4`}>
-          {data?.map((item) => {
-            if (item.type != "bun") {
+          {data.map((item) => {
+            if (item.type !== "bun") {
               return (
                 <li key={item._id} className={`${styles.item}  mb-4 pr-2`}>
                   <span className={`mr-2`}>
@@ -50,8 +49,8 @@ function BurgerConstructor({ data }) {
             }
           })}
         </ul>
-        <ul className={`${styles.list} mb-10`}>
-          {data?.map((item) => {
+        <ul className={`${styles.list} ml-10 mb-10`}>
+          {data.map((item) => {
             if (item._id === "60666c42cc7b410027a1a9b1") {
               return (
                 <li key={item._id} className={`${styles.item}`}>
@@ -68,12 +67,12 @@ function BurgerConstructor({ data }) {
           })}
         </ul>
       </div>
-      <div className={`${styles.order} mr-4 mb-10`}>
+      <div className={`${styles.order} mr-4`}>
         <p className={`text text_type_digits-medium mr-3`}>610</p>
         <div className={`${styles.logo} pr-10`}>
           <CurrencyIcon />
         </div>
-        <Button type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large">
           Оформить заказ
         </Button>
       </div>

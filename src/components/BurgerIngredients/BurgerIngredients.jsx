@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./burgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerIngredientList from "../burgerIngredients/burgerIngredientList/burgerIngredientsList.jsx";
+import BurgerIngredientList from "./burgerIngredientList/burgerIngredientsList.jsx";
 import {dataBurgerPropTypes, bun, main, sauce} from "../../utils/data.jsx";
 
 function BurgerIngredients({data}) {

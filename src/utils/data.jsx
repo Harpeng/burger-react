@@ -232,9 +232,9 @@ export const dataBurgerPropTypes = PropTypes.shape({
     image_mobile: PropTypes.string.isRequired,
     image_large: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired,
-    bun: PropTypes.array.isRequired,
-    main:PropTypes.array.isRequired,
-    sauce:PropTypes.array.isRequired,
+    bun: PropTypes.array,
+    main:PropTypes.array,
+    sauce:PropTypes.array,
 });
  
 

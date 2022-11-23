@@ -1,5 +1,4 @@
 .burgerIngredients {
-    margin: 0 auto;
     max-width: 600px;
     width: 100%;
 }
@@ -19,7 +18,7 @@
   }
   .ingredientsBar::-webkit-scrollbar-thumb {
     width: 8px;
-    height: 492px;
+    height: 40vh;
     background-color: #8585ad;
   }
 
