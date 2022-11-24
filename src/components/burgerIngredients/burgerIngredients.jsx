@@ -3,7 +3,7 @@ import styles from "./burgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientList from "./burgerIngredientList/burgerIngredientsList.jsx";
-import {dataBurgerPropTypes, bun, main, sauce} from "../../utils/data.jsx";
+import {dataBurger, bun, main, sauce} from "../../utils/data.jsx";
 
 function BurgerIngredients({data}) {
   const [current, setCurrent] = React.useState("one");
@@ -37,10 +37,10 @@ function BurgerIngredients({data}) {
 }
 
 
-dataBurgerPropTypes.propTypes = {
-    sauce: PropTypes.arrayOf(dataBurgerPropTypes).isRequired,
-    main: PropTypes.arrayOf(dataBurgerPropTypes).isRequired,
-    bun: PropTypes.arrayOf(dataBurgerPropTypes).isRequired,
+dataBurger.propTypes = {
+    sauce: PropTypes.arrayOf(dataBurger).isRequired,
+    main: PropTypes.arrayOf(dataBurger).isRequired,
+    bun: PropTypes.arrayOf(dataBurger).isRequired,
   };
 
 export default BurgerIngredients;

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./burgerConstructor.module.css";
 import PropTypes from "prop-types";
 import data from "../../utils/data.jsx";
-import { dataBurgerPropTypes, bun } from "../../utils/data.jsx";
+import { dataBurger } from "../../utils/data.jsx";
 import {
   Button,
   ConstructorElement,
@@ -81,7 +81,7 @@ function BurgerConstructor({ data }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(dataBurgerPropTypes).isRequired,
+  data: PropTypes.arrayOf(dataBurger).isRequired,
 };
 
 export default BurgerConstructor;

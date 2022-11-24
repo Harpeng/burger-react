@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-const data = [
+export const dataBurger = [
     {
      "_id":"60666c42cc7b410027a1a9b1",
      "name":"Краторная булка N-200i",
@@ -215,27 +215,7 @@ const data = [
     }
 ]
 
-export const bun = data.filter(item => item.type === "bun");
-export const main = data.filter(item => item.type === "main");
-export const sauce = data.filter(item => item.type === "sauce");
+export const bun = dataBurger.filter(item => item.type === "bun");
+export const main = dataBurger.filter(item => item.type === "main");
+export const sauce = dataBurger.filter(item => item.type === "sauce");
 
-export const dataBurgerPropTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired,
-    bun: PropTypes.array,
-    main:PropTypes.array,
-    sauce:PropTypes.array,
-});
- 
-
-export default data;
