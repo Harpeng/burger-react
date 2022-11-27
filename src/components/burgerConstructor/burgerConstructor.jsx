@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./burgerConstructor.module.css";
 import PropTypes from "prop-types";
-import data from "../../utils/data.jsx";
-import { dataBurger } from "../../utils/data.jsx";
+import { dataBurger } from "../../utils/data.js";
+import {burgerPropTypes} from "../../utils/types.js";
 import {
   Button,
   ConstructorElement,
@@ -10,12 +10,12 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
   return (
     <section className={`${styles.burgerConstructor}`}>
       <div className={styles.itemsBar}>
         <ul className={`${styles.list} mt-25 ml-4 mr-4`}>
-          {data.map((item) => {
+          {dataBurger.map((item) => {
             if (item._id === "60666c42cc7b410027a1a9b1") {
               return (
                 <li key={item._id} className={`${styles.item} ml-8`}>
@@ -32,7 +32,7 @@ function BurgerConstructor({ data }) {
           })}
         </ul>
         <ul className={`${styles.list} ${styles.itemUnlock} ml-4 mr-4`}>
-          {data.map((item) => {
+          {dataBurger.map((item) => {
             if (item.type !== "bun") {
               return (
                 <li key={item._id} className={`${styles.item}  mb-4 pr-2`}>
@@ -50,7 +50,7 @@ function BurgerConstructor({ data }) {
           })}
         </ul>
         <ul className={`${styles.list} ml-10 mb-10`}>
-          {data.map((item) => {
+          {dataBurger.map((item) => {
             if (item._id === "60666c42cc7b410027a1a9b1") {
               return (
                 <li key={item._id} className={`${styles.item}`}>
@@ -81,7 +81,7 @@ function BurgerConstructor({ data }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(dataBurger).isRequired,
+  dataBurger: PropTypes.arrayOf(burgerPropTypes),
 };
 
 export default BurgerConstructor;

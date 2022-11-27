@@ -3,9 +3,10 @@ import styles from "./burgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientList from "./burgerIngredientList/burgerIngredientsList.jsx";
-import {dataBurger, bun, main, sauce} from "../../utils/data.jsx";
+import { bun, main, sauce} from "../../utils/data.js";
+import {burgerPropTypes} from "../../utils/types.js";
 
-function BurgerIngredients({data}) {
+function BurgerIngredients() {
   const [current, setCurrent] = React.useState("one");
   const handleClick = (evt) => {
     setCurrent(evt);
@@ -37,10 +38,10 @@ function BurgerIngredients({data}) {
 }
 
 
-dataBurger.propTypes = {
-    sauce: PropTypes.arrayOf(dataBurger).isRequired,
-    main: PropTypes.arrayOf(dataBurger).isRequired,
-    bun: PropTypes.arrayOf(dataBurger).isRequired,
+BurgerIngredients.propTypes = {
+    sauce: PropTypes.arrayOf(burgerPropTypes),
+    main: PropTypes.arrayOf(burgerPropTypes),
+    bun: PropTypes.arrayOf(burgerPropTypes),
   };
 
 export default BurgerIngredients;

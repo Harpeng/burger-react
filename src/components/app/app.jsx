@@ -3,7 +3,7 @@ import styles from './app.module.css';
 import AppHeader from '../appHeader/appHeader.jsx'
 import BurgerIngredients from '../burgerIngredients/BurgerIngredients.jsx';
 import BurgerConstructor from '../burgerConstructor/burgerConstructor.jsx';
-import {dataBurger} from '../../utils/data.jsx';
+import {dataBurger} from '../../utils/data.js';
 
 function App() {
   console.log('привет')

@@ -6,20 +6,20 @@ import {
     Counter,
   } from "@ya.praktikum/react-developer-burger-ui-components";
 
-  function BurgerIngredient(data) {
+  function BurgerIngredient(props) {
     return (
-      <li key={data._id} className={`${styles.burgerIngredient} mt-6 mb-10`}>
-        <img src={data.src} alt={data.name} className={`${styles.image} mb-2`} />
+      <li key={props._id} className={`${styles.burgerIngredient} mt-6 mb-10`}>
+        <img src={props.src} alt={props.name} className={`${styles.image} mb-2`} />
         <div className={`${styles.description} mb-2`}>
           <p
             className={`${styles.price} mr-2 text text_type_main-medium`}
           >
-            {data.price}
+            {props.price}
           </p>
           <CurrencyIcon type="primary" />
         </div>
         <p className={`${styles.name} text text_type_main-default`}>
-          {data.name}
+          {props.name}
         </p>
           <Counter count={1} size="default" />
       </li>
@@ -27,7 +27,9 @@ import {
   }
 
   BurgerIngredient.propTypes = {
-    dataCard: PropTypes.object
+    name: PropTypes.string,
+    price: PropTypes.number,
+    src: PropTypes.any,
   };
 
   export default BurgerIngredient;
