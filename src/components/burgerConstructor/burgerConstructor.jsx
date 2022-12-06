@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./burgerConstructor.module.css";
 import PropTypes from "prop-types";
-import { dataBurger } from "../../utils/data.js";
 import {burgerPropTypes} from "../../utils/types.js";
 import {
   Button,
@@ -10,13 +9,13 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function BurgerConstructor() {
+function BurgerConstructor({data, openOrder}) {
   return (
     <section className={`${styles.burgerConstructor}`}>
       <div className={styles.itemsBar}>
         <ul className={`${styles.list} mt-25 ml-4 mr-4`}>
-          {dataBurger.map((item) => {
-            if (item._id === "60666c42cc7b410027a1a9b1") {
+          {data.map((item) => {
+            if (item._id === "60d3b41abdacab0026a733c6") {
               return (
                 <li key={item._id} className={`${styles.item} ml-8`}>
                   <ConstructorElement
@@ -32,7 +31,7 @@ function BurgerConstructor() {
           })}
         </ul>
         <ul className={`${styles.list} ${styles.itemUnlock} ml-4 mr-4`}>
-          {dataBurger.map((item) => {
+          {data.map((item) => {
             if (item.type !== "bun") {
               return (
                 <li key={item._id} className={`${styles.item}  mb-4 pr-2`}>
@@ -50,8 +49,8 @@ function BurgerConstructor() {
           })}
         </ul>
         <ul className={`${styles.list} ml-10 mb-10`}>
-          {dataBurger.map((item) => {
-            if (item._id === "60666c42cc7b410027a1a9b1") {
+          {data.map((item) => {
+            if (item._id === "60d3b41abdacab0026a733c6") {
               return (
                 <li key={item._id} className={`${styles.item}`}>
                   <ConstructorElement
@@ -72,7 +71,7 @@ function BurgerConstructor() {
         <div className={`${styles.logo} pr-10`}>
           <CurrencyIcon />
         </div>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={openOrder}>
           Оформить заказ
         </Button>
       </div>
@@ -81,7 +80,8 @@ function BurgerConstructor() {
 }
 
 BurgerConstructor.propTypes = {
-  dataBurger: PropTypes.arrayOf(burgerPropTypes),
+  data: PropTypes.arrayOf(burgerPropTypes),
+  openOrder: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

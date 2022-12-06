@@ -8,7 +8,7 @@ import {
 
   function BurgerIngredient(props) {
     return (
-      <li key={props._id} className={`${styles.burgerIngredient} mt-6 mb-10`}>
+      <li onClick={props.onClick} key={props._id} className={`${styles.burgerIngredient} mt-6 mb-10`}>
         <img src={props.src} alt={props.name} className={`${styles.image} mb-2`} />
         <div className={`${styles.description} mb-2`}>
           <p
@@ -30,6 +30,7 @@ import {
     name: PropTypes.string,
     price: PropTypes.number,
     src: PropTypes.any,
+    onClick: PropTypes.func.isRequired,
   };
 
   export default BurgerIngredient;

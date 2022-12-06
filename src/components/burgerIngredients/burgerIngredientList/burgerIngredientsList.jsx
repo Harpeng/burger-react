@@ -3,7 +3,7 @@ import styles from './burgerIngredientList.module.css';
 import PropTypes from "prop-types";
 import BurgerIngredient from '../burgerIngredient/burgerIngredient.jsx';
 
-function BurgerIngredientList({ data, name }) {
+function BurgerIngredientList({ data, name, onClick }) {
     return (
       <section className={styles.burgerIngredientList}>
         <p className={`text text_type_main-medium mt-10 ${styles.title}`}>{name}</p>
@@ -14,6 +14,7 @@ function BurgerIngredientList({ data, name }) {
               key={item._id}
               src={item.image}
               price={item.price}
+              onClick={() => onClick(item)}
             />
           ))}
         </ul>
@@ -23,6 +24,7 @@ function BurgerIngredientList({ data, name }) {
   BurgerIngredientList.propTypes = {
     data: PropTypes.array,
     name: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
   };
 
   export default BurgerIngredientList;
