@@ -71,7 +71,7 @@ function BurgerConstructor({data, openOrder}) {
         <div className={`${styles.logo} pr-10`}>
           <CurrencyIcon />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick={openOrder}>
+        <Button htmlType="button" type="primary" size="large" onClick = {openOrder}>
           Оформить заказ
         </Button>
       </div>
@@ -81,7 +81,7 @@ function BurgerConstructor({data, openOrder}) {
 
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(burgerPropTypes),
-  openOrder: PropTypes.func.isRequired,
+  openOrder: PropTypes.func,
 };
 
 export default BurgerConstructor;

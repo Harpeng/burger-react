@@ -45,7 +45,7 @@ BurgerIngredients.propTypes = {
     sauce: PropTypes.arrayOf(burgerPropTypes),
     main: PropTypes.arrayOf(burgerPropTypes),
     bun: PropTypes.arrayOf(burgerPropTypes),
-    openItem: PropTypes.func.isRequired,
+    openItem: PropTypes.func,
   };
 
 export default BurgerIngredients;

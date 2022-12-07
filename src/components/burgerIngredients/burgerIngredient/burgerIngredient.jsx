@@ -6,20 +6,20 @@ import {
     Counter,
   } from "@ya.praktikum/react-developer-burger-ui-components";
 
-  function BurgerIngredient(props) {
+  function BurgerIngredient({src, name, price, onClick}) {
     return (
-      <li onClick={props.onClick} key={props._id} className={`${styles.burgerIngredient} mt-6 mb-10`}>
-        <img src={props.src} alt={props.name} className={`${styles.image} mb-2`} />
+      <li onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
+        <img src={src} alt={name} className={`${styles.image} mb-2`} />
         <div className={`${styles.description} mb-2`}>
           <p
             className={`${styles.price} mr-2 text text_type_main-medium`}
           >
-            {props.price}
+            {price}
           </p>
           <CurrencyIcon type="primary" />
         </div>
         <p className={`${styles.name} text text_type_main-default`}>
-          {props.name}
+          {name}
         </p>
           <Counter count={1} size="default" />
       </li>
@@ -30,7 +30,7 @@ import {
     name: PropTypes.string,
     price: PropTypes.number,
     src: PropTypes.any,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
   };
 
   export default BurgerIngredient;

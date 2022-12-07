@@ -3,6 +3,9 @@ import styles from "./app.module.css";
 import AppHeader from "../appHeader/appHeader.jsx";
 import BurgerIngredients from "../burgerIngredients/BurgerIngredients.jsx";
 import BurgerConstructor from "../burgerConstructor/burgerConstructor.jsx";
+import {Modal} from "../modal/modal.jsx";
+import {OrderDetails} from "../orderDetails/orderDetails.jsx";
+import {IngredientDetails} from "../ingredientDetails/ingredientDetail.jsx";
 
 function App() {
   let [state, setState] = React.useState({
@@ -28,6 +31,7 @@ function App() {
 
   const openOrder = () => {
     setOrder(true);
+    console.log('ghbdt');
   };
 
   React.useEffect(() => {
@@ -51,8 +55,8 @@ function App() {
     <section className={styles.page}>
       <AppHeader />
       <main className={styles.page__content}>
-        <BurgerIngredients itemHandler={openItem} data={state.dataBurger} />
-        <BurgerConstructor data={state.dataBurger} openPopup={openOrder} />
+        <BurgerIngredients openItem={openItem} data={state.dataBurger} />
+        <BurgerConstructor data={state.dataBurger} openOrder={openOrder} />
       </main>
       {order && 
       <Modal closePopup={closePopup} title="">
