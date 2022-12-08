@@ -24,11 +24,12 @@
     transition: 0.5s linear;
     padding: 0;
     position: absolute;
-    top: 63px;
-    right: 43px;
+    top: 51px;
+    right: 46px;
     opacity: 1;
     width: 18px;
     height: 18px;
+    background-color: transparent;
 }
 
 .title {

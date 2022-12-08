@@ -10,6 +10,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerConstructor({data, openOrder}) {
+
   return (
     <section className={`${styles.burgerConstructor}`}>
       <div className={styles.itemsBar}>
@@ -71,7 +72,7 @@ function BurgerConstructor({data, openOrder}) {
         <div className={`${styles.logo} pr-10`}>
           <CurrencyIcon />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick = {openOrder}>
+        <Button htmlType="button" type="primary" size="large" onClick={openOrder}>
           Оформить заказ
         </Button>
       </div>

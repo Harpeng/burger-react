@@ -29,9 +29,7 @@ export function Modal({children, title, closePopup}) {
                     <button className={styles.closeIcon} onClick={closePopup}>
                         <CloseIcon type="primary" />
                     </button>
-                    <div>
                     {children}
-                    </div>
                 </div>
             </ModalOverlay>
         </section>

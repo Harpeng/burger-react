@@ -11,15 +11,15 @@ export function IngredientDetails({item}) {
             <ul className={styles.DataCards}>
                 <li className={`${styles.card} mr-5`}>
                     <p className="text text_type_main-default text_color_inactive mb-2">Калории,ккал</p>
-                    <p className={`${styles.text}text text_type_main-default text_color_inactive`}>{item.calories}</p>
+                    <p className={`${styles.text} text text_type_main-default text_color_inactive`}>{item.calories}</p>
                 </li>
                 <li className={`${styles.card} mr-5`}>
                     <p className="text text_type_main-default text_color_inactive mb-2">Белки,г</p>
-                    <p className={`${styles.text}text text_type_main-default text_color_inactive`}>{item.proteins}</p>
+                    <p className={`${styles.text} text text_type_main-default text_color_inactive`}>{item.proteins}</p>
                 </li>
                 <li className={`${styles.card} mr-5`}>
                     <p className="text text_type_main-default text_color_inactive mb-2">Жиры,г</p>
-                    <p className={`${styles.text}text text_type_main-default text_color_inactive`}>{item.fat}</p>
+                    <p className={`${styles.text} text text_type_main-default text_color_inactive`}>{item.fat}</p>
                 </li>
                 <li className={`${styles.card}`}>
                     <p className="text text_type_main-default text_color_inactive mb-2">Углеводы,г</p>

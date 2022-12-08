@@ -5,10 +5,12 @@
     align-items: center;
     height: 100%;
     max-height: 718px;
+    margin-top: 64px;
 }
 
 .img {
     width: 120px;
     height: 120px;
     align-self: center;
+    margin: 60px 0;
 }

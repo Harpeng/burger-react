@@ -58,9 +58,8 @@ function App() {
         <BurgerIngredients openItem={openItem} data={state.dataBurger} />
         <BurgerConstructor data={state.dataBurger} openOrder={openOrder} />
       </main>
-      {order && 
-      <Modal closePopup={closePopup} title="">
-        <OrderDetails />
+      {order && <Modal closePopup={closePopup} title="">
+        <OrderDetails order={order} title={"034536"}/>
       </Modal>}
       {item && <Modal closePopup={closePopup} title="Детали ингредиента">
         <IngredientDetails item={item}/>
