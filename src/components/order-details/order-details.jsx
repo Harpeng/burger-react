@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./orderDetails.module.css";
+import styles from "./order-details.module.css";
 import readyIcon from "../../images/done.png";
 import PropTypes from "prop-types";
 

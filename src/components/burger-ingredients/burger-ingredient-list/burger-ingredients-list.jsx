@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './burgerIngredientList.module.css';
+import styles from './burger-ingredient-list.module.css';
 import PropTypes from "prop-types";
-import BurgerIngredient from '../burgerIngredient/burgerIngredient.jsx';
+import BurgerIngredient from '../burger-ingredient/burger-ingredient.jsx';
 import {burgerPropTypes} from '../../../utils/types.js'
 
 function BurgerIngredientList({ data, name, onClick }) {

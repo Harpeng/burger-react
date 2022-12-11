@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./burgerConstructor.module.css";
+import styles from "./burger-constructor.module.css";
 import PropTypes from "prop-types";
 import {burgerPropTypes} from "../../utils/types.js";
 import {

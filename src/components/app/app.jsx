@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./app.module.css";
-import AppHeader from "../appHeader/appHeader.jsx";
-import BurgerIngredients from "../burgerIngredients/BurgerIngredients.jsx";
-import BurgerConstructor from "../burgerConstructor/burgerConstructor.jsx";
+import AppHeader from "../app-header/app-header.jsx";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
+import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 import {Modal} from "../modal/modal.jsx";
-import {OrderDetails} from "../orderDetails/orderDetails.jsx";
-import {IngredientDetails} from "../ingredientDetails/ingredientDetail.jsx";
+import {OrderDetails} from "../order-details/order-details.jsx";
+import {IngredientDetails} from "../ingredient-details/ingredient-detail.jsx";
 
 function App() {
-  let [state, setState] = React.useState({
+  const [state, setState] = React.useState({
     dataBurger: [],
     loading: false,
     error: false,
@@ -24,10 +24,12 @@ function App() {
 
   const [order, setOrder] = React.useState(false);
 
-  const closePopup = () => {
+  const closePopup = (e) => {
     setOrder(false);
     setItem(null);
+    console.log('привет');
   };
+
 
   const openOrder = () => {
     setOrder(true);
@@ -39,7 +41,7 @@ function App() {
       try {
         setState({ ...state, isLoading: true, hasError: false });
         fetch("https://norma.nomoreparties.space/api/ingredients")
-          .then((res) => res.json())
+          .then((res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
           .then((data) => {
             setState({ ...state, dataBurger: data.data });
           });
