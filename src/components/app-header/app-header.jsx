@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./appHeader.module.css";
+import styles from "./app-header.module.css";
 import logo from "../../images/headerLogo.svg";
 import {
   BurgerIcon,

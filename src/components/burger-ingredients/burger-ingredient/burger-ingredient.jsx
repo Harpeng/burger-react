@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './burgerIngredient.module.css';
+import styles from './burger-ingredient.module.css';
 import PropTypes from "prop-types";
 import {
     CurrencyIcon,
