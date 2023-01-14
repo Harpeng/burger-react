@@ -8,6 +8,18 @@ import { ModalOverlay } from "../modal-overlay/modal-overlay.jsx";
 export function Modal({children, title, closePopup}) {
     const modalRoot = document.getElementById("react-modals");
 
+    React.useEffect(() => {
+      const closeHandler = (evt) => {
+        if (evt.key === "Escape") {
+          closePopup();
+        }
+      };
+      document.addEventListener("keydown", closeHandler);
+      return () => {
+      document.removeEventListener("keydown", closeHandler);
+      };
+    }, [closePopup]);
+
     return createPortal(
         <section>
             <ModalOverlay closePopup={closePopup}>

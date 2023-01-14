@@ -31,17 +31,6 @@ function BurgerConstructor() {
     setStateOrder({...stateOrder, overlay: false});
   };
 
-  React.useEffect(() => {
-    const closeHandler = (evt) => {
-      if (evt.key === "Escape") {
-        closePopup();
-      }
-    };
-    document.addEventListener("keydown", closeHandler);
-    return () => {
-    document.removeEventListener("keydown", closeHandler);
-    };
-  }, [closePopup]);
 
   const fillings = data.filter(item => item.type !== 'bun')
 

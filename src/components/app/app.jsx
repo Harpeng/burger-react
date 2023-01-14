@@ -21,7 +21,6 @@ function App() {
   const [order, setOrder] = React.useState(false);
 
   const closePopup = (e) => {
-    setOrder(false);
     setItem(null);
     console.log("привет");
   };
