@@ -4,8 +4,18 @@ import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientList from "./burger-ingredient-list/burger-ingredients-list.jsx";
 import {burgerPropTypes} from "../../utils/types.js";
+import { DataContext, HandlerContext} from "../../utils/context.jsx";
 
-function BurgerIngredients({data, openItem}) {
+function BurgerIngredients() {
+  const data = React.useContext(DataContext).state.dataBurger;
+  const setItem = React.useContext(HandlerContext).setItem;
+
+    const openItem = (item) => {
+    if (item) {
+      setItem(item);
+    }
+  };
+
   const [current, setCurrent] = React.useState("one");
   const handleClick = (evt) => {
     setCurrent(evt);
