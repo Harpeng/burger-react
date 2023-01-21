@@ -8,6 +8,7 @@ import { OrderDetails } from "../order-details/order-details.jsx";
 import { IngredientDetails } from "../ingredient-details/ingredient-detail.jsx";
 import { DataContext, HandlerContext, PriceContext } from "../../utils/context.jsx";
 
+
 function App() {
   const [state, setState] = React.useState({
     dataBurger: [],
