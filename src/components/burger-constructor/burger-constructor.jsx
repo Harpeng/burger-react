@@ -11,18 +11,21 @@ import {
 import { DataContext, HandlerContext, PriceContext} from "../../utils/context.jsx";
 import {Modal} from "../modal/modal.jsx";
 import { OrderDetails } from "../order-details/order-details.jsx";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function BurgerConstructor() {
 
-  const data = React.useContext(DataContext).state.dataBurger;
+  const { dataBurger } = useSelector(store => store.burgerIngredientsReducer);
+
+  const dispatch = useDispatch();
   const setOrder = React.useContext(HandlerContext).setOrder;
   const [stateOrder, setStateOrder] = React.useState({
     overlay: false,
     isLoading: false,
     hasError: false,
   });
-  const buns= data.filter(
+  const buns= dataBurger.filter(
     (element) => element.type === "bun"
   );
 
@@ -32,7 +35,7 @@ function BurgerConstructor() {
   };
 
 
-  const fillings = data.filter(item => item.type !== 'bun')
+  const fillings = dataBurger.filter(item => item.type !== 'bun')
 
     const openOrder = () => {
       setOrder(true);
@@ -44,10 +47,10 @@ function BurgerConstructor() {
   React.useEffect(() => {
       let total = 0;
       priceDispatch({type: 'reset'});
-      data.map(item => (total += item.price));
+      dataBurger.map(item => (total += item.price));
       priceDispatch({type: 'increment', price: total});
     },
-    [data, priceDispatch]
+    [dataBurger, priceDispatch]
   );
 
   const orderPrice = [];

@@ -5,8 +5,10 @@ import {
     CurrencyIcon,
     Counter,
   } from "@ya.praktikum/react-developer-burger-ui-components";
+  import { useDispatch, useSelector } from 'react-redux';
 
-  function BurgerIngredient({src, name, price, onClick}) {
+  function BurgerIngredient({id, src, name, price, onClick}) {
+    const count = useSelector((store) => store.burgerIngredientsReducer.dataBurger.find(item => item._id === id).qty);
     return (
       <li onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
         <img src={src} alt={name} className={`${styles.image} mb-2`} />
@@ -21,7 +23,7 @@ import {
         <p className={`${styles.name} text text_type_main-default`}>
           {name}
         </p>
-          <Counter count={1} size="default" />
+          <Counter count={count} size="default" />
       </li>
     );
   }

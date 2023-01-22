@@ -7,44 +7,43 @@ import { Modal } from "../modal/modal.jsx";
 import { OrderDetails } from "../order-details/order-details.jsx";
 import { IngredientDetails } from "../ingredient-details/ingredient-detail.jsx";
 import { DataContext, HandlerContext, PriceContext } from "../../utils/context.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchItems } from "../../services/actions/burger-ingredient";
+
+
 
 
 function App() {
-  const [state, setState] = React.useState({
-    dataBurger: [],
-    loading: false,
-    error: false,
-  });
 
-  const [item, setItem] = React.useState(null);
 
 
   const [order, setOrder] = React.useState(false);
 
   const closePopup = (e) => {
-    setItem(null);
     console.log("привет");
   };
 
 
-  React.useEffect(() => {
-    const getBurgerData = async () => {
-      try {
-        setState({ ...state, isLoading: true, hasError: false });
-        fetch("https://norma.nomoreparties.space/api/ingredients")
-          .then((res) =>
-            res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-          )
-          .then((data) => {
-            setState({ ...state, dataBurger: data.data });
-          });
-      } catch (err) {
-        console.log("Ошибка");
-        setState({ ...state, loading: false, error: true });
-      }
-    };
-    getBurgerData();
-  }, []);
+  // React.useEffect(() => {
+  //   const getBurgerData = async () => {
+  //     try {
+  //       setState({ ...state, isLoading: true, hasError: false });
+  //       fetch("https://norma.nomoreparties.space/api/ingredients")
+  //         .then((res) =>
+  //           res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+  //         )
+  //         .then((data) => {
+  //           setState({ ...state, dataBurger: data.data });
+  //         });
+  //     } catch (err) {
+  //       console.log("Ошибка");
+  //       setState({ ...state, loading: false, error: true });
+  //     }
+  //   };
+  //   getBurgerData();
+  // }, []);
+
+
 
 
   const init = { price: 0 };
@@ -65,26 +64,19 @@ function App() {
   return (
     <section className={styles.page}>
       <AppHeader />
-      <DataContext.Provider value={{state, setState}}>
-        <main className={styles.page__content}>
-          <HandlerContext.Provider value={{setItem, setOrder }}>
-            <BurgerIngredients />
-            <PriceContext.Provider value={{price, priceDispatch}}>
-              <BurgerConstructor />
-            </PriceContext.Provider>
-          </ HandlerContext.Provider>
-        </main>
+       <main className={styles.page__content}>
+        <HandlerContext.Provider value={{setOrder }}>
+          <BurgerIngredients />
+          <PriceContext.Provider value={{price, priceDispatch}}>
+            <BurgerConstructor />
+          </PriceContext.Provider>
+        </ HandlerContext.Provider>
+      </main>
         {order && (
           <Modal closePopup={closePopup} title="">
             <OrderDetails />
           </Modal>
         )}
-        {item && (
-          <Modal closePopup={closePopup} title="Детали ингредиента">
-            <IngredientDetails item={item} />
-          </Modal>
-        )}
-      </DataContext.Provider>
     </section>
   );
 }

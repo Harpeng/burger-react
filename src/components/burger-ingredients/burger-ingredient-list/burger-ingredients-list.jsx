@@ -12,6 +12,8 @@ function BurgerIngredientList({ data, name, onClick}) {
         <ul className={`${styles.list}`}>
           {data.map((item) => (
             <BurgerIngredient
+              id={item._id}
+              count={item.count}
               name={item.name}
               key={item._id}
               src={item.image}
