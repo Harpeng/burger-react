@@ -27,6 +27,7 @@ const orderDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         orderSucces: true,
+        orderRequest: false,
         servOrder: action.servOrder,
       };
     }

@@ -36,9 +36,9 @@ const burgerIngredientsReducer = (state = initialState, action) => {
     case INCREMENT_COUNT: {
       return {
         ...state,
-        dataBurger: [...state.dataBurger].map((item) =>
-          item._id === action.id
-            ? { ...item, qty: item.count + action.count }
+        dataBurger: [...state.dataBurger].find((item) =>
+          item._id === action.payload.id
+            ? { ...item, qty: item.qty + action.payload }
             : item
         ),
       };

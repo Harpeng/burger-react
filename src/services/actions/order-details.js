@@ -30,10 +30,9 @@ const closeOrderModal = () => {
       };
 }
 
-const openOrderModal = (servOrder) => {
+const openOrderModal = () => {
     return {
         type: OPEN_ORDER_MODAL,
-        servOrder: servOrder,
       };
 }
 

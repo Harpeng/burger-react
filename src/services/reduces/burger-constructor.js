@@ -6,6 +6,7 @@ export const initialState = {
   burgerConstructorItems: [],
   bun: {},
   overlay: false,
+  count: 0,
 };
 
 export const burgerConstructorReducer = (state = initialState, action) => {
@@ -57,19 +58,10 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       };
     }
     case DELETE_ITEM: {
-      const deletetElement = state.burgerConstructorItems.find(
-        (item) => item.index === action.item.index
-      );
-
       return {
         ...state,
-        dataBurger: [...state.dataBurger].map((item) =>
-          item._id === action.item.id ? { ...item, count: --item.count } : item
-        ),
-        burgerConstructorItems: state.burgerConstructorItems.filter(
-          (item) => item != deletetElement
-        ),
-      };
+        burgerConstructorItems: [...state.burgerConstructorItems].filter(item => item.id !== action.id)
+      }
     }
     // case CHANGE_ITEM: {
     //   const newArray = [...state.burgerConstructorItems];

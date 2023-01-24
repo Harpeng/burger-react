@@ -16,8 +16,10 @@ import {
           isDragging: monitor.isDragging()
       })
   })
-    const count = useSelector((store) => store.burgerIngredientsReducer.dataBurger.find(item => item._id === id).qty);
-    return (
+  const { dataBurger } = useSelector((state) => state.burgerIngredientsReducer);
+  const totalCount = dataBurger.reduce((sum, item) => sum + item.count, 0);
+
+  return (
       <li ref={dragRef} onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
         <img src={src} alt={name} className={`${styles.image} mb-2`} />
         <div className={`${styles.description} mb-2`}>
@@ -31,9 +33,7 @@ import {
         <p className={`${styles.name} text text_type_main-default`}>
           {name}
         </p>
-        {count === null && (
-          <Counter count={count} size="default" />
-        )}
+          <Counter count={totalCount} size="default" />
       </li>
     );
   }
