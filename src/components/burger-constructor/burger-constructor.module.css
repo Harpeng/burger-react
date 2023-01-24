@@ -57,3 +57,34 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+.emptyBlock {
+    width: 400px;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 35vh;
+    display: flex;
+    overflow-y: hidden;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 250px auto;
+    text-align: center;
+    border: 1px solid white;
+  }
+
+  .emptyBlock:hover {
+    border: 1px solid #4c4cff;
+    cursor: pointer;
+    box-shadow: #4c4cff 0px 54px 55px, #4c4cff 0px -12px 30px, #4c4cff 0px 4px 6px,  #4c4cff 0px 12px 13px,  #4c4cff 0px -3px 5px;
+  }
+
+  .emptyBlockMsg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }

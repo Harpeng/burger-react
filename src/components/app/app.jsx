@@ -1,27 +1,25 @@
 import React from "react";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header.jsx";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
 import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 import { Modal } from "../modal/modal.jsx";
 import { OrderDetails } from "../order-details/order-details.jsx";
-import { IngredientDetails } from "../ingredient-details/ingredient-detail.jsx";
-import { DataContext, HandlerContext, PriceContext } from "../../utils/context.jsx";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from "../../services/actions/burger-ingredient";
+import {HandlerContext, PriceContext } from "../../utils/context.jsx";
+
 
 
 
 
 function App() {
 
+  // const [order, setOrder] = React.useState(false);
 
-
-  const [order, setOrder] = React.useState(false);
-
-  const closePopup = (e) => {
-    console.log("привет");
-  };
+  // const closePopup = (e) => {
+  //   console.log("привет");
+  // };
 
 
   // React.useEffect(() => {
@@ -44,39 +42,30 @@ function App() {
   // }, []);
 
 
+  // const init = { price: 0 };
 
+  // function reducer(state, action) {
+  //   switch (action.type) {
+  //     case "increment":
+  //       return {...state, price: state.price + action.price };
+  //     case "reset":
+  //       return { ...state, price: 0 };
+  //     default:
+  //       return state;
+  //   }
+  // }
 
-  const init = { price: 0 };
-
-  function reducer(state, action) {
-    switch (action.type) {
-      case "increment":
-        return {...state, price: state.price + action.price };
-      case "reset":
-        return { ...state, price: 0 };
-      default:
-        return state;
-    }
-  }
-
-  const [price, priceDispatch] = React.useReducer(reducer, init, undefined);
+  // const [price, priceDispatch] = React.useReducer(reducer, init, undefined);
 
   return (
     <section className={styles.page}>
       <AppHeader />
        <main className={styles.page__content}>
-        <HandlerContext.Provider value={{setOrder }}>
+       <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
-          <PriceContext.Provider value={{price, priceDispatch}}>
-            <BurgerConstructor />
-          </PriceContext.Provider>
-        </ HandlerContext.Provider>
+          <BurgerConstructor />
+       </DndProvider>
       </main>
-        {order && (
-          <Modal closePopup={closePopup} title="">
-            <OrderDetails />
-          </Modal>
-        )}
     </section>
   );
 }

@@ -1,3 +1,9 @@
+import { v4 as uuid } from "uuid";
+export const ADD_ITEM = 'ADD_ITEM';
+export const DELETE_ITEM = 'DELETE_ITEM';
+export const ADD_INGREDIENT_BURGER = 'ADD_INGREDIENT_BURGER';
+
+
 const GET_ITEMS_REQUEST = "GET_ITEM_REQUEST";
 const GET_ITEMS_SUCCESS = "GET_ITEM_SUCCESS";
 const GET_ITEMS_ERROR = "GET_ITEM_ERROR";
@@ -42,36 +48,20 @@ const fetchItems = () => {
   };
 };
 
-const inctrementCount = (id, count) => ({
-  type: INCREMENT_COUNT,
-  id: id,
-  count: count,
-});
+export const addItem = (item) => {
+    const uuids = uuid();
+    return {
+        //type: ADD_INGREDIENT_BURGER,
+        payload: {...item, key: uuids },
+    }
+}
 
-const decreaseCount = (id, count) => ({
-  type: DECREMENT_COUNT,
-  id: id,
-  count: count,
-});
-
-const setCount = (id, count) => ({
-  type: SET_COUNT,
-  id: id,
-  count: count,
-});
-
-export {
-  inctrementCount,
-  decreaseCount,
-  setCount,
-  INCREMENT_COUNT,
-  DECREMENT_COUNT,
-  SET_COUNT,
-  GET_ITEMS_REQUEST,
-  GET_ITEMS_SUCCESS,
-  GET_ITEMS_ERROR,
-  getItemsRequest,
-  getItemsSuccess,
-  getItemsError,
-  fetchItems,
-};
+export const addIngredient = (item) => ({
+    type: ADD_INGREDIENT_BURGER,
+    data: {...item, id: uuid()}
+  });
+  
+  export const deleteIngredient = (id) => ({
+    type: DELETE_ITEM,
+    id: id,
+  });
