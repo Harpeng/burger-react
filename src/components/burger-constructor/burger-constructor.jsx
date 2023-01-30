@@ -93,6 +93,8 @@ const deleteElement = (item) => {
   });
 };
 
+
+
   return (
     <section ref={dropTarget} className={`${styles.burgerConstructor}`}>
       <div className={styles.itemsBar}>
@@ -153,7 +155,7 @@ const deleteElement = (item) => {
       </div>
       {burgerConstructorItems[0] && (
       <div className={`${styles.order} mr-4`}>
-      <p className={`text text_type_digits-medium mr-3`}>{setOrderPrice()}</p>
+      <p className={`text text_type_digits-medium mr-3`}>{setOrderPrice}</p>
       <div className={`${styles.logo} pr-10`}>
         <CurrencyIcon  />
       </div>

@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import {ADD_ITEM, DELETE_ITEM} from '../actions/burger-constructor.js'
+import {ADD_ITEM, DELETE_ITEM, SORT_ITEM} from '../actions/burger-constructor.js'
 
 export const initialState = {
   dataBurger: [],
@@ -60,9 +60,16 @@ export const burgerConstructorReducer = (state = initialState, action) => {
     case DELETE_ITEM: {
       return {
         ...state,
-        burgerConstructorItems: [...state.burgerConstructorItems].filter(item => item.id !== action.id)
-      }
+        burgerConstructorItems: state.burgerConstructorItems.filter(
+          (item) => item._id !== action.payload._id
+        ),
+      };
     }
+    case SORT_ITEM:
+      return {
+        ...state,
+        burgerConstructorItems: action.payload,
+      };
     // case CHANGE_ITEM: {
     //   const newArray = [...state.burgerConstructorItems];
     //   newArray.splice(action.dragIndex, 1);

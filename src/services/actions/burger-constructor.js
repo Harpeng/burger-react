@@ -2,6 +2,8 @@ import { v4 as uuid } from "uuid";
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const ADD_INGREDIENT_BURGER = 'ADD_INGREDIENT_BURGER';
+export const SORT_ITEM = 'SORT_ITEM';
+
 
 
 const GET_ITEMS_REQUEST = "GET_ITEM_REQUEST";
@@ -63,5 +65,4 @@ export const addIngredient = (item) => ({
   
   export const deleteIngredient = (id) => ({
     type: DELETE_ITEM,
-    id: id,
   });
