@@ -1,67 +1,42 @@
 import { v4 as uuid } from "uuid";
-import {ADD_ITEM, DELETE_ITEM, SORT_ITEM} from '../actions/burger-constructor.js'
+import {
+  ADD_ITEM,
+  DELETE_ITEM,
+  SORT_ITEM,
+  ADD_FILLING,
+  ADD_BUN,
+  addItem
+} from "../actions/burger-constructor.js";
 
 export const initialState = {
   dataBurger: [],
   burgerConstructorItems: [],
-  bun: {},
+  bun: null,
   overlay: false,
   count: 0,
 };
 
 export const burgerConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_ITEM: {
-      if (action.item.payload.type === "bun") {
-        if (action.item.payload.count < 1) {
-          return {
-            ...state,
-            bun: action.item.payload,
-            dataBurger: [...state.dataBurger].map((item) => {
-              if (item.type === "bun" && item._id === action.item.payload.id) {
-                return { ...item, count: ++item.count };
-              } else if (item.type === "bun") {
-                return { ...item, count: 0 };
-              } else {
-                return { ...item };
-              }
-            }),
-          };
-        } else if (action.item.payload.count >= 1) {
-          return { ...state };
-        }
-      } else if (action.item.payload.type != "bun") {
-        console.log(state.burgerConstructorItems);
+    case ADD_ITEM:
+      if (action.payload.type === "bun") {
         return {
           ...state,
-          burgerConstructorItems: [
-            ...state.burgerConstructorItems,
-            action.item.payload,
-          ],
-          dataBurger: [...state.dataBurger].map((item) => {
-            if (item.type != "bun" && item._id === action.item.payload.id) {
-              return { ...item, count: ++item.count };
-            } else {
-              return { ...item };
-            }
-          }),
+          bun: action.payload.type,
         };
-      } else {
-        return { ...state, bun: action.item };
       }
       return {
         ...state,
         burgerConstructorItems: [
           ...state.burgerConstructorItems,
-          action.item.payload,
+          action.payload,
         ],
       };
-    }
     case DELETE_ITEM: {
       return {
         ...state,
         burgerConstructorItems: state.burgerConstructorItems.filter(
-          (item) => item._id !== action.payload._id
+          (item) => item.id !== action.payload.id
         ),
       };
     }
@@ -81,4 +56,3 @@ export const burgerConstructorReducer = (state = initialState, action) => {
     }
   }
 };
-

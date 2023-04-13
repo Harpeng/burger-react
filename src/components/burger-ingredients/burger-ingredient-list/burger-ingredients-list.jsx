@@ -13,6 +13,7 @@ function BurgerIngredientList({ data, name, onClick}) {
           {data.map((item) => (
             <BurgerIngredient
               id={item._id}
+              type={item.type}
               count={item.count}
               name={item.name}
               key={item._id}

@@ -4,40 +4,44 @@ import { burgerPropTypes } from "../../../utils/types.js";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import {
-    ConstructorElement,
-    DragIcon,
-  } from "@ya.praktikum/react-developer-burger-ui-components";
+  ConstructorElement,
+  DragIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-fillings.module.css";
 import { DELETE_ITEM } from "../../../services/actions/burger-constructor.js";
 
-function BurgerFillingItem({burgerConstructorItems}) {
-    const dispatch = useDispatch();
+function BurgerFillingItem({ burgerConstructorItems }) {
+  const dispatch = useDispatch();
 
-    const deleteItem = () => {
-        dispatch({ type: DELETE_ITEM, payload: burgerConstructorItems })
-    }
+  const deleteItem = () => {
+    dispatch({ type: DELETE_ITEM, payload: burgerConstructorItems });
+  };
 
-    return (
-        <Reorder.Item
-          whileDrag={{ scale: 0.9 }}
-          value={burgerConstructorItems}
-          className={style.item}
-        >
+  return (
+    <Reorder.Item
+      whileDrag={{ scale: 0.9 }}
+      value={burgerConstructorItems}
+      className={style.item}
+    >
+      <div className={`${style.item}  mb-4 pr-2`}>
+        <span className={`mr-2`}>
           <DragIcon />
-          <ConstructorElement
-            text={burgerConstructorItems.name}
-            price={burgerConstructorItems.price}
-            thumbnail={burgerConstructorItems.image}
-            handleClose={() =>
-                {deleteItem()}
-            }
-          />
-        </Reorder.Item>
-      );
-    }
-    
-    BurgerFillingItem.propTypes = {
-     burgerConstructorItems: PropTypes.arrayOf(burgerPropTypes),
-    };
+        </span>
+        <ConstructorElement
+          text={burgerConstructorItems.name}
+          price={burgerConstructorItems.price}
+          thumbnail={burgerConstructorItems.src}
+          handleClose={() => {
+            deleteItem();
+          }}
+        />
+      </div>
+    </Reorder.Item>
+  );
+}
 
-    export default BurgerFillingItem;
+BurgerFillingItem.propTypes = {
+  burgerConstructorItems: PropTypes.objectOf(burgerPropTypes),
+};
+
+export default BurgerFillingItem;

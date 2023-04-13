@@ -16,6 +16,7 @@ function BurgerIngredients() {
   const dataBurger = useSelector((store) => store.burgerIngredientsReducer.dataBurger); //получение ингредиентов с сервера
   const { item } = useSelector(store => store.ingredientDetailsReducer);
 
+
   const dispatch = useDispatch();
 
     const openItem = (item) => {
@@ -31,6 +32,8 @@ function BurgerIngredients() {
   const bun = dataBurger.filter((element) => element.type === "bun");
   const main = dataBurger.filter((element) => element.type === "main");
   const sauce = dataBurger.filter((element) => element.type === "sauce");
+
+
 
   
   

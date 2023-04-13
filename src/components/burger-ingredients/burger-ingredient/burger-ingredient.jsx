@@ -18,6 +18,7 @@ import {
   })
   const getIngredientsCount = (store) => store.burgerIngredientsReducer.dataBurger.find(item => item._id === id).count;  
   const counts = useSelector(getIngredientsCount);
+  
 
   return (
       <li ref={dragRef} onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
@@ -33,7 +34,7 @@ import {
         <p className={`${styles.name} text text_type_main-default`}>
           {name}
         </p>
-          <Counter count={counts} size="default" />
+        {counts > 0 &&<Counter count={counts} size="default" />}
       </li>
     );
   }
