@@ -1,9 +1,6 @@
 import { v4 as uuid } from "uuid";
 export const ADD_ITEM = 'ADD_ITEM';
-export const ADD_BUN = 'ADD_BUN';
-export const ADD_FILLING = 'ADD_FILLING';
 export const DELETE_ITEM = 'DELETE_ITEM';
-export const ADD_INGREDIENT_BURGER = 'ADD_INGREDIENT_BURGER';
 export const SORT_ITEM = 'SORT_ITEM';
 
 
@@ -15,19 +12,6 @@ const INCREMENT_COUNT = "INCREASE_COUNT";
 const DECREMENT_COUNT = "DECREASE_COUNT";
 const SET_COUNT = "SET_COUNT";
 
-export const addBuns = (payload) => {
-  return {
-    type: ADD_BUN,
-    payload
-  }
-}
-
-export const addFilling = (payload) => {
-  return {
-    type: ADD_FILLING,
-    payload
-  }
-}
 
 const getItemsRequest = () => {
   return {

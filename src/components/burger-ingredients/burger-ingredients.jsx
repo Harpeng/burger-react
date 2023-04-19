@@ -13,30 +13,16 @@ import {openIngredientDetails, closeIngredientDetails} from "../../services/acti
 import { useInView } from 'react-intersection-observer';
 
 function BurgerIngredients() {
+  
   const dataBurger = useSelector((store) => store.burgerIngredientsReducer.dataBurger); //получение ингредиентов с сервера
   const { item } = useSelector(store => store.ingredientDetailsReducer);
-
-
+  
   const dispatch = useDispatch();
-
-    const openItem = (item) => {
-      dispatch(openIngredientDetails(item));
-    }
-
-
-  const closePopup = (e) => {
-    dispatch(closeIngredientDetails());
-  };
-
 
   const bun = dataBurger.filter((element) => element.type === "bun");
   const main = dataBurger.filter((element) => element.type === "main");
   const sauce = dataBurger.filter((element) => element.type === "sauce");
 
-
-
-  
-  
   const [bunRef, bunsInView] = useInView({
     threshold: 0,
 });
@@ -47,22 +33,11 @@ function BurgerIngredients() {
     threshold: 0,
   });
 
-  const [current, setCurrent] = React.useState("bun");
-  const handleClick = (tab) => {
-    setCurrent(tab);
-    const element = document.getElementById(tab);
-    if (element) {
-      return (element.scrollIntoView({ behavior: "smooth" }),
-      console.log(element, 'леша-пися')
-      )
-    }
-  }
-
   React.useEffect(() => {
     if (bunsInView) {
       setCurrent("bun")
     } else if (saucesInView) {
-      console.log(saucesInView,'катя-пися')
+      console.log(saucesInView,)
       setCurrent("sauce")
     } else if (mainInView) {
       setCurrent("main")
@@ -72,6 +47,30 @@ function BurgerIngredients() {
   React.useEffect(() => {
     dispatch(fetchItems());
   }, [dispatch])
+
+
+  const openItem = (item) => {
+    dispatch(openIngredientDetails(item));
+  }
+
+
+const closePopup = (e) => {
+  dispatch(closeIngredientDetails());
+};
+  
+  
+
+  const [current, setCurrent] = React.useState("bun");
+  const handleClick = (tab) => {
+    setCurrent(tab);
+    const element = document.getElementById(tab);
+    if (element) {
+      return (element.scrollIntoView({ behavior: "smooth" })
+      )
+    }
+  }
+
+
 
   return (
     <section className={styles.burgerIngredients}>

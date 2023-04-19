@@ -37,7 +37,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         dataBurger: [...state.dataBurger].map((item) =>
-          item._id === action.id
+          item.id === action.id
             ? { ...item, qty: item.qty + action.count }
             : item
         ),
@@ -47,7 +47,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         dataBurger: [...state.dataBurger].map((item) =>
-          item._id === action.id
+          item.id === action.id
             ? { ...item, qty: item.count - action.count }
             : item
         ),
@@ -57,7 +57,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         dataBurger: [...state.dataBurger].map((item) =>
-          item._id === action.id ? { ...item, qty: action.count } : item
+          item.id === action.id ? { ...item, qty: action.count } : item
         ),
       };
     }

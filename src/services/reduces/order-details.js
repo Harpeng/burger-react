@@ -28,7 +28,7 @@ const orderDetailsReducer = (state = initialState, action) => {
         ...state,
         orderSucces: true,
         orderRequest: false,
-        servOrder: action.servOrder,
+        servOrder: action.id.nubmer,
       };
     }
     case GET_ORDER_DATA_ERROR: {
@@ -42,6 +42,7 @@ const orderDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         openModal: false,
+        servOrder: null,
       };
     }
     case OPEN_ORDER_MODAL: {

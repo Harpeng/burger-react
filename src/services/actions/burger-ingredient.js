@@ -42,7 +42,7 @@ const fetchItems = () => {
   };
 };
 
-const inctrementCount = (id, count) => ({
+const incrementCount = (id, count) => ({
   type: INCREMENT_COUNT,
   id: id,
   count: count,
@@ -61,7 +61,7 @@ const setCount = (id, count) => ({
 });
 
 export {
-  inctrementCount,
+  incrementCount,
   decreaseCount,
   setCount,
   INCREMENT_COUNT,

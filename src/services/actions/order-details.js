@@ -11,12 +11,6 @@ const getOrderDataRequest = () => {
   };
 };
 
-const getOrderDataSuccess = (data) => {
-  return {
-    type: GET_ORDER_DATA_SUCCESS,
-    servOrder: data.order.number,
-  };
-};
 
 const getOrderDataError = () => {
   return {
@@ -29,6 +23,13 @@ const closeOrderModal = () => {
         type: CLOSE_ORDER_MODAL,
       };
 }
+
+const getOrderDataSuccess = (data) => {
+  return {
+    type: GET_ORDER_DATA_SUCCESS,
+    servOrder: data.id.number,
+  };
+};
 
 const openOrderModal = () => {
     return {
@@ -46,6 +47,7 @@ const orderError = () => {
 const openOrderDetails = (orderId) => {
     {
     return (dispatch) => { 
+      dispatch(openOrderModal());
       dispatch(getOrderDataRequest());
       fetch("https://norma.nomoreparties.space/api/orders", {
         method: "POST",
@@ -55,6 +57,7 @@ const openOrderDetails = (orderId) => {
         },
         body: JSON.stringify({ ingredients: orderId}),
       })
+      console.log(orderId,'sds')
         .then((res) =>
           res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
         )

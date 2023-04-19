@@ -4,6 +4,7 @@ import readyIcon from "../../images/done.png";
 import PropTypes from "prop-types";
 
 export function OrderDetails({orderNumber}) {
+    console.log(orderNumber, "sdsd");
     return(
         <div className={`${styles.orderBlock} pt-4 pr-25 pb-30 pl-25`}>
             <p className="text text_type_digits-large mb-8">{orderNumber}</p>

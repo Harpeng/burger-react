@@ -8,20 +8,22 @@ import {
   import { useDispatch, useSelector } from 'react-redux';
   import { useDrag } from 'react-dnd'
 
-  function BurgerIngredient({id, src, name, price, onClick}) {
+  function BurgerIngredient({data, count, id, src, name, price, type}) {
     const [{ isDragging }, dragRef] = useDrag({
       type: 'item',
-      item: {id, src, name, price, onClick},
+      item: {id, src, name, price, type, count},
       collect: (monitor) => ({
           isDragging: monitor.isDragging()
       })
   })
-  const getIngredientsCount = (store) => store.burgerIngredientsReducer.dataBurger.find(item => item._id === id).count;  
-  const counts = useSelector(getIngredientsCount);
-  
+
+
+  const dispatch = useDispatch();
+
+
 
   return (
-      <li ref={dragRef} onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
+      <li ref={dragRef} className={`${styles.burgerIngredient} mt-6 mb-10`}>
         <img src={src} alt={name} className={`${styles.image} mb-2`} />
         <div className={`${styles.description} mb-2`}>
           <p
@@ -34,7 +36,7 @@ import {
         <p className={`${styles.name} text text_type_main-default`}>
           {name}
         </p>
-        {counts > 0 &&<Counter count={counts} size="default" />}
+        <Counter count="#" size="default" />
       </li>
     );
   }

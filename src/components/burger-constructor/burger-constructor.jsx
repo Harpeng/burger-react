@@ -32,6 +32,7 @@ import {
   addBuns,
   addFilling
 } from "../../services/actions/burger-constructor.js";
+import {incrementCount, decreaseCount, setCount} from "../../services/actions/burger-ingredient.js";
 import { useDrop } from "react-dnd";
 import BurgerFillingItem from "./burger-fillings.jsx/burger-fillings";
 import { Reorder } from "framer-motion";
@@ -44,12 +45,15 @@ function BurgerConstructor() {
     fillingItems: store.burgerConstructorReducer.burgerConstructorItems,
   }));
 
-  // const burgerConstructorItems = useSelector((state) => state.burgerConstructorReducer)
+  const {items} = useSelector((store) => ({
+    items: store.burgerIngredientsReducer.dataBurger,
+  }))
   
 
   const state = useSelector((store) => store);
 
-  //  const bun = useSelector((state) => state.burgerConstructorReducer.bun);
+  const getNubmerId = state.orderDetailsReducer.servOrder;
+
 
   const orderOverlay = state.orderDetailsReducer.openModal;
 
@@ -57,45 +61,31 @@ function BurgerConstructor() {
     dispatch(closeOrderModal());
   };
 
-  // const bun = dataBurger.filter((element) => element.type === "bun");
-
-  // const bunArr = bun.map((item) => item.id);
-  // const burgerConstructorItemsArr = burgerConstructorItems.map(
-  //   (item) => item.id
-  // );
-  // const orderId = [...bunArr, ...burgerConstructorItemsArr];
-
-    // const setOrderPrice = () => {
-    //   return burgerConstructorItems.reduce(
-    //     (sum, current) => sum + current.price,
-    //     0 + bun.price ? bun.price * 2 : 0
-    //   );
-    // };
 
   const getOrder = () => {
-    // dispatch(openOrderDetails(orderId));
-    dispatch(openOrderModal());
+   dispatch(openOrderDetails());
   };
 
   const handleDrop = (item) => {
     dispatch(addItem(item));
   };
 
-  // const [{ isHover }, dropTarget] = useDrop({
-  //   accept: "item",
-  //   drop(itemId) {
-  //     handleDrop(addItem(itemId));
-  //   },
-  //   collect: (monitor) => ({
-  //     isHover: monitor.isOver(),
-  //   }),
-  // });
 
   const [{isHover}, dropTarget] = useDrop({
     accept: 'item',
 
     drop(item) {
       handleDrop(item);
+      console.log(item, 'sdsds');
+      item.type !== 'bun' ?
+      dispatch(incrementCount(item.id, 1)) :
+      dispatch(setCount(item.id, 2)) &&
+      items.forEach(ingredient =>
+        console.log(item,'ghgfgf') &&
+        ingredient.type === 'bun' &&
+        ingredient.id !== item.id &&
+        dispatch(setCount(item.id, 0))
+        )
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),
@@ -110,9 +100,12 @@ function BurgerConstructor() {
     });
   };
 
- 
+  let totalPrice = React.useMemo(() => fillingItems.reduce(
+    (price, item) => (price += item.price),
+    bun ? bun.price*2 : 0),
+    [bun, fillingItems]);
 
-  console.log(bun);
+ 
 
   return (
     <section ref={dropTarget} className={`${styles.burgerConstructor}`}>
@@ -120,12 +113,12 @@ function BurgerConstructor() {
         <ul className={`${styles.list} mt-25 ml-4 mr-4`}>
             <li className={`${styles.item} ml-8`}>
             {bun ? ( <ConstructorElement
-                type={bun.type}
-                isLocked={true}
+                id = {bun._id}
                 text={`${bun.name} (верх)`}
                 price={bun.price}
-                thumbnail={bun.img}
-
+                thumbnail={bun.src}
+                type="top"
+                isLocked={true}
               />
             ) : (
               <div className={`${styles.item}`}>
@@ -156,11 +149,12 @@ function BurgerConstructor() {
         <ul className={`${styles.list} ml-10 mb-10`}>
             <li className={`${styles.item}`}>
             {bun ? ( <ConstructorElement
+                id = {bun.id}
+                text={`${bun.name} (верх)`}
+                price={bun.price}
+                thumbnail={bun.src}
                 type="bottom"
                 isLocked={true}
-                text={`${bun.name} (низ)`}
-                price={bun.price}
-                thumbnail={bun.img}
               />
             ) : (
               <div className={`${styles.item}`}>
@@ -173,9 +167,9 @@ function BurgerConstructor() {
       </div>
       {fillingItems[0] && (
         <div className={`${styles.order} mr-4`}>
-          <p className={`text text_type_digits-medium mr-3`}></p>
+          <p className={`text text_type_digits-medium mr-3`}>{totalPrice ? totalPrice : 0}</p>
           <div className={`${styles.logo} pr-10`}>
-            <CurrencyIcon />
+            <CurrencyIcon type="primary"/>
           </div>
           <Button
             htmlType="button"
@@ -193,7 +187,7 @@ function BurgerConstructor() {
           {state.orderDetailsReducer.orderError && "Произошла ошибка"}
           {!state.orderDetailsReducer.orderRequest &&
             !state.orderDetailsReducer.orderError && (
-              <OrderDetails orderNumber={state.orderDetailsReducer.servOrder} />
+              <OrderDetails orderNumber={getNubmerId} />
             )}
         </Modal>
       )}

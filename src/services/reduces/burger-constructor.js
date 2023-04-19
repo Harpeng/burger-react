@@ -22,7 +22,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       if (action.payload.type === "bun") {
         return {
           ...state,
-          bun: action.payload.type,
+          bun: action.payload,
         };
       }
       return {
@@ -45,12 +45,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         ...state,
         burgerConstructorItems: action.payload,
       };
-    // case CHANGE_ITEM: {
-    //   const newArray = [...state.burgerConstructorItems];
-    //   newArray.splice(action.dragIndex, 1);
-    //   newArray.splice(action.hoverIndex, 0, action.dragItem);
-    //   return { ...state, burgerConstructorItems: newArray };
-    // }
     default: {
       return state;
     }
