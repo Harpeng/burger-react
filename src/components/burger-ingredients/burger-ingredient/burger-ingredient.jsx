@@ -8,7 +8,7 @@ import {
   import { useDispatch, useSelector } from 'react-redux';
   import { useDrag } from 'react-dnd'
 
-  function BurgerIngredient({data, count, id, src, name, price, type}) {
+  function BurgerIngredient({data, count, id, src, name, price, type, onClick}) {
     const [{ isDragging }, dragRef] = useDrag({
       type: 'item',
       item: {id, src, name, price, type, count},
@@ -23,7 +23,7 @@ import {
 
 
   return (
-      <li ref={dragRef} className={`${styles.burgerIngredient} mt-6 mb-10`}>
+      <li ref={dragRef} onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
         <img src={src} alt={name} className={`${styles.image} mb-2`} />
         <div className={`${styles.description} mb-2`}>
           <p

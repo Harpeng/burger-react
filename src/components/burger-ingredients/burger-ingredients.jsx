@@ -89,14 +89,14 @@ const closePopup = (e) => {
         </Tab>
       </div>
       <div className={styles.ingredientsBar}>
-        <div id="bun" ref={bunRef}>
-        <BurgerIngredientList  name={"Булки"} data={bun} onClick={openItem} />
+        <div id="bun">
+        <BurgerIngredientList  name={"Булки"} data={bun} onClick={openItem} ref={bunRef} />
         </div>
-        <div id="sauce" ref={sauceRef}>
-        <BurgerIngredientList name={"Соусы"} data={sauce} onClick={openItem} />
+        <div id="sauce" >
+        <BurgerIngredientList name={"Соусы"} data={sauce} onClick={openItem} ref={sauceRef} />
         </div>
-        <div id="main" ref={mainRef}>
-        <BurgerIngredientList name={"Начинки"} data={main} onClick={openItem} />
+        <div id="main" >
+        <BurgerIngredientList name={"Начинки"} data={main} onClick={openItem} ref={mainRef}/>
         </div>
       </div>
       {item && (

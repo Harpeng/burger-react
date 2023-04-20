@@ -63,7 +63,10 @@ function BurgerConstructor() {
 
 
   const getOrder = () => {
-   dispatch(openOrderDetails());
+    const arrayId = [
+      ...items.map((item) => item._id),
+    ];
+   dispatch(openOrderDetails(arrayId));
   };
 
   const handleDrop = (item) => {
@@ -197,7 +200,7 @@ function BurgerConstructor() {
 
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(burgerPropTypes),
-  getNubmerId: PropTypes.func,
 };
 
 export default BurgerConstructor;
+

@@ -27,7 +27,7 @@ const closeOrderModal = () => {
 const getOrderDataSuccess = (data) => {
   return {
     type: GET_ORDER_DATA_SUCCESS,
-    servOrder: data.id.number,
+    payload: data.order.number,
   };
 };
 
@@ -57,7 +57,6 @@ const openOrderDetails = (orderId) => {
         },
         body: JSON.stringify({ ingredients: orderId}),
       })
-      console.log(orderId,'sds')
         .then((res) =>
           res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
         )

@@ -28,7 +28,7 @@ const orderDetailsReducer = (state = initialState, action) => {
         ...state,
         orderSucces: true,
         orderRequest: false,
-        servOrder: action.id.nubmer,
+        servOrder: action.payload,
       };
     }
     case GET_ORDER_DATA_ERROR: {
