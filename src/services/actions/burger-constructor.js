@@ -53,11 +53,12 @@ const fetchItems = () => {
 export const addItem = (item) => {
     return {
         type: ADD_ITEM,
-        payload: {...item, id: uuid() },
+        payload: {...item, _id: uuid() },
     }
 }
 
   
   export const deleteIngredient = (id) => ({
     type: DELETE_ITEM,
+    id: id,
   });

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 export const burgerPropTypes = PropTypes.shape({
     _id: PropTypes.string,
+    id: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.oneOf(["bun", "main", "sauce"]),
     proteins: PropTypes.number,

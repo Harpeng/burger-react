@@ -25,7 +25,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         dataBurger: action.dataBurger.map((item) => {
-          return { ...item, qty: 0 };
+          return { ...item, count: 0 };
         }),
       };
     case GET_ITEMS_ERROR:
@@ -38,7 +38,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
         ...state,
         dataBurger: [...state.dataBurger].map((item) =>
           item.id === action.id
-            ? { ...item, qty: item.qty + action.count }
+            ? { ...item, count: item.count + action.count }
             : item
         ),
       };
@@ -48,7 +48,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
         ...state,
         dataBurger: [...state.dataBurger].map((item) =>
           item.id === action.id
-            ? { ...item, qty: item.count - action.count }
+            ? { ...item, count: item.count - action.count }
             : item
         ),
       };
@@ -57,7 +57,7 @@ const burgerIngredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         dataBurger: [...state.dataBurger].map((item) =>
-          item.id === action.id ? { ...item, qty: action.count } : item
+          item.id === action.id ? { ...item, count: action.count } : item
         ),
       };
     }

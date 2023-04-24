@@ -16,7 +16,7 @@ function BurgerIngredients() {
   
   const dataBurger = useSelector((store) => store.burgerIngredientsReducer.dataBurger); //получение ингредиентов с сервера
   const { item } = useSelector(store => store.ingredientDetailsReducer);
-  
+
   const dispatch = useDispatch();
 
   const bun = dataBurger.filter((element) => element.type === "bun");
@@ -72,6 +72,7 @@ const closePopup = (e) => {
 
 
 
+
   return (
     <section className={styles.burgerIngredients}>
       <h1 className={"text text_type_main-large mt-10 mb-5 ${styles.title }"}>
@@ -89,14 +90,14 @@ const closePopup = (e) => {
         </Tab>
       </div>
       <div className={styles.ingredientsBar}>
-        <div id="bun">
-        <BurgerIngredientList  name={"Булки"} data={bun} onClick={openItem} ref={bunRef} />
+        <div id="bun" ref={bunRef} >
+        <BurgerIngredientList  name={"Булки"} data={bun} onClick={openItem} />
         </div>
-        <div id="sauce" >
-        <BurgerIngredientList name={"Соусы"} data={sauce} onClick={openItem} ref={sauceRef} />
+        <div id="sauce" ref={sauceRef}>
+        <BurgerIngredientList name={"Соусы"} data={sauce} onClick={openItem} />
         </div>
-        <div id="main" >
-        <BurgerIngredientList name={"Начинки"} data={main} onClick={openItem} ref={mainRef}/>
+        <div id="main" ref={mainRef} >
+        <BurgerIngredientList name={"Начинки"} data={main} onClick={openItem} />
         </div>
       </div>
       {item && (

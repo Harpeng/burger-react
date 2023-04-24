@@ -7,8 +7,9 @@ import {
   } from "@ya.praktikum/react-developer-burger-ui-components";
   import { useDispatch, useSelector } from 'react-redux';
   import { useDrag } from 'react-dnd'
+  import { v4 as uuid } from "uuid";
 
-  function BurgerIngredient({data, count, id, src, name, price, type, onClick}) {
+  function BurgerIngredient({data, id, src, name, price, type, onClick, count}) {
     const [{ isDragging }, dragRef] = useDrag({
       type: 'item',
       item: {id, src, name, price, type, count},
@@ -17,8 +18,20 @@ import {
       })
   })
 
+  const burgerComponents = useSelector(state => state.burgerConstructorReducer);
 
-  const dispatch = useDispatch();
+
+  console.log(burgerComponents.burgerConstructorItems)
+  const myCount = burgerComponents.bun 
+    ? data.type === 'bun'
+      ? data._id = burgerComponents.bun.id
+        ? 2
+        : 0
+  : burgerComponents.burgerConstructorItems.reduce((acc,ingredient) => ingredient.id === data._id ? acc + 1 : acc, 0)
+    : 0
+
+    console.log(burgerComponents.bun );
+
 
 
 
@@ -36,7 +49,7 @@ import {
         <p className={`${styles.name} text text_type_main-default`}>
           {name}
         </p>
-        <Counter count="#" size="default" />
+         <Counter count={myCount} size="default" />
       </li>
     );
   }

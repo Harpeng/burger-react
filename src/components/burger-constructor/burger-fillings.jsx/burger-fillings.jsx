@@ -13,8 +13,10 @@ import { DELETE_ITEM } from "../../../services/actions/burger-constructor.js";
 function BurgerFillingItem({ burgerConstructorItems }) {
   const dispatch = useDispatch();
 
+  
+
   const deleteItem = () => {
-    dispatch({ type: DELETE_ITEM, payload: burgerConstructorItems });
+    dispatch({ type: DELETE_ITEM, payload: burgerConstructorItems._id });
   };
 
   return (
@@ -32,7 +34,7 @@ function BurgerFillingItem({ burgerConstructorItems }) {
           price={burgerConstructorItems.price}
           thumbnail={burgerConstructorItems.src}
           handleClose={() => {
-            deleteItem();
+            deleteItem(burgerConstructorItems._id);
           }}
         />
       </div>

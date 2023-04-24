@@ -9,7 +9,6 @@ import {
 } from "../actions/burger-constructor.js";
 
 export const initialState = {
-  dataBurger: [],
   burgerConstructorItems: [],
   bun: null,
   overlay: false,
@@ -36,7 +35,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       return {
         ...state,
         burgerConstructorItems: state.burgerConstructorItems.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item._id !== action.payload
         ),
       };
     }

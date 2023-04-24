@@ -73,28 +73,33 @@ function BurgerConstructor() {
     dispatch(addItem(item));
   };
 
+  // const ingredientsCount = React.useMemo(() => {
+  //   const result = {};
+
+
+  //   fillingItems.forEach(item => {
+  //     result[item.id] = result[item.id] ?? 0;
+  //     result[item.id]++;
+  //   });
+    
+
+  //   if (bun) result[bun.id] = 2;
+
+
+  //   return result;
+  // }, [fillingItems, bun]);
+
 
   const [{isHover}, dropTarget] = useDrop({
     accept: 'item',
 
     drop(item) {
       handleDrop(item);
-      console.log(item, 'sdsds');
-      item.type !== 'bun' ?
-      dispatch(incrementCount(item.id, 1)) :
-      dispatch(setCount(item.id, 2)) &&
-      items.forEach(ingredient =>
-        console.log(item,'ghgfgf') &&
-        ingredient.type === 'bun' &&
-        ingredient.id !== item.id &&
-        dispatch(setCount(item.id, 0))
-        )
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),
     }),
   });
-
 
   const deleteElement = (item) => {
     dispatch({
@@ -142,7 +147,7 @@ function BurgerConstructor() {
             {fillingItems.map((item, index) => {
               return (
                 <BurgerFillingItem
-                  key={item.id}
+                  key={item._id}
                   index={index}
                   burgerConstructorItems={item}
                 ></BurgerFillingItem>
