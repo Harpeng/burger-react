@@ -43,7 +43,7 @@ function BurgerFillingItem({ burgerConstructorItems }) {
 }
 
 BurgerFillingItem.propTypes = {
-  burgerConstructorItems: PropTypes.objectOf(burgerPropTypes),
+  burgerConstructorItems: PropTypes.object,
 };
 
 export default BurgerFillingItem;

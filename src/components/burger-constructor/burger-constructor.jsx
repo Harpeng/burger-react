@@ -147,7 +147,7 @@ function BurgerConstructor() {
             {fillingItems.map((item, index) => {
               return (
                 <BurgerFillingItem
-                  key={item._id}
+                  key={uuid()}
                   index={index}
                   burgerConstructorItems={item}
                 ></BurgerFillingItem>
@@ -204,7 +204,7 @@ function BurgerConstructor() {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(burgerPropTypes),
+  bun: PropTypes.objectOf(burgerPropTypes),
 };
 
 export default BurgerConstructor;

@@ -21,16 +21,22 @@ import {
   const burgerComponents = useSelector(state => state.burgerConstructorReducer);
 
 
-  console.log(burgerComponents.burgerConstructorItems)
-  const myCount = burgerComponents.bun 
-    ? data.type === 'bun'
-      ? data._id = burgerComponents.bun.id
-        ? 2
-        : 0
-  : burgerComponents.burgerConstructorItems.reduce((acc,ingredient) => ingredient.id === data._id ? acc + 1 : acc, 0)
-    : 0
 
-    console.log(burgerComponents.bun );
+  const myCount = React.useMemo(() => {
+    if(type === 'bun') {
+      return id === burgerComponents.bun?.id ? 2 : 0;
+    } else {
+      return burgerComponents.burgerConstructorItems.reduce((acc, item) => {
+        if(item?.id === id) {
+          return acc +1;
+        } else {
+          return acc
+        }
+      }, 0);
+    }
+  }, [burgerComponents.bun, burgerComponents.burgerConstructorItems, id, type])
+
+
 
 
 
