@@ -1,4 +1,6 @@
 import { v4 as uuid } from "uuid";
+import {baseUrl} from '../../utils/utils.js';
+import {checkResponce} from '../../utils/api.js';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SORT_ITEM = 'SORT_ITEM';
@@ -33,27 +35,11 @@ const getItemsError = (error) => {
   };
 };
 
-const fetchItems = () => {
-  return (dispatch) => {
-    dispatch(getItemsRequest);
-    fetch("https://norma.nomoreparties.space/api/ingredients")
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-      )
-      .then((data) => {
-        dispatch(getItemsSuccess(data));
-      })
-      .catch((error) => {
-        console.log(`Ошибка при загрузке данных: ${error}`);
-        dispatch(getItemsError(error));
-      });
-  };
-};
 
 export const addItem = (item) => {
     return {
         type: ADD_ITEM,
-        payload: {...item, _id: uuid() },
+        payload: {...item, uniqueId: uuid() },
     }
 }
 

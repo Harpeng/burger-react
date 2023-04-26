@@ -1,3 +1,6 @@
+import {baseUrl} from '../../utils/utils.js';
+import {checkResponce} from '../../utils/api.js';
+
 const GET_ITEMS_REQUEST = "GET_ITEM_REQUEST";
 const GET_ITEMS_SUCCESS = "GET_ITEM_SUCCESS";
 const GET_ITEMS_ERROR = "GET_ITEM_ERROR";
@@ -25,13 +28,12 @@ const getItemsError = (error) => {
   };
 };
 
+
 const fetchItems = () => {
   return (dispatch) => {
     dispatch(getItemsRequest);
-    fetch("https://norma.nomoreparties.space/api/ingredients")
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-      )
+    fetch(`${baseUrl}/ingredients`)
+      .then(checkResponce)
       .then((data) => {
         dispatch(getItemsSuccess(data));
       })

@@ -1,3 +1,6 @@
+import {baseUrl} from '../../utils/utils.js';
+import {checkResponce} from '../../utils/api.js';
+
 const GET_ORDER_DATA_REQUEST = "GET_ORDER_DATA_REQUEST";
 const GET_ORDER_DATA_SUCCESS = "GET_ORDER_DATA_SUCCESS";
 const GET_ORDER_DATA_ERROR = "GET_ORDER_DATA_ERROR";
@@ -49,7 +52,7 @@ const openOrderDetails = (orderId) => {
     return (dispatch) => { 
       dispatch(openOrderModal());
       dispatch(getOrderDataRequest());
-      fetch("https://norma.nomoreparties.space/api/orders", {
+      fetch(`${baseUrl}/orders`, {
         method: "POST",
         headers: {
           authorization: "",
