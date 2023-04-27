@@ -20,7 +20,7 @@ import {
 
   const burgerComponents = useSelector(state => state.burgerConstructorReducer);
 
-
+console.log(burgerComponents.burgerConstructorItems.id);
 
   const myCount = React.useMemo(() => {
     if(type === 'bun') {

@@ -35,7 +35,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       return {
         ...state,
         burgerConstructorItems: state.burgerConstructorItems.filter(
-          (item) => item._id !== action.payload
+          (item) => item.uniqueId !== action.payload
         ),
       };
     }

@@ -44,7 +44,7 @@ export const addItem = (item) => {
 }
 
   
-  export const deleteIngredient = (id) => ({
+  export const deleteIngredient = (uniqueId) => ({
     type: DELETE_ITEM,
-    id: id,
+    payload: uniqueId,
   });

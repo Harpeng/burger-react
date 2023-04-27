@@ -60,9 +60,7 @@ const openOrderDetails = (orderId) => {
         },
         body: JSON.stringify({ ingredients: orderId}),
       })
-        .then((res) =>
-          res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-        )
+      .then(checkResponce)
         .then((data) => {
           dispatch(getOrderDataSuccess(data));
         })

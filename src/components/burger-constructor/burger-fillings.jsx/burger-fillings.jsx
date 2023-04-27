@@ -9,15 +9,19 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-fillings.module.css";
 import { DELETE_ITEM } from "../../../services/actions/burger-constructor.js";
+import {deleteIngredient} from "../../../services/actions/burger-constructor.js";
+import {decreaseCount} from "../../../services/actions/burger-ingredient.js";
 
 function BurgerFillingItem({ burgerConstructorItems }) {
   const dispatch = useDispatch();
 
   
+  const handleDelete = (id) => {
+    dispatch(deleteIngredient(id));
+  }
 
-  const deleteItem = () => {
-    dispatch({ type: DELETE_ITEM, payload: burgerConstructorItems._id });
-  };
+  console.log(burgerConstructorItems.uniqueId)
+
 
   return (
     <Reorder.Item
@@ -34,7 +38,7 @@ function BurgerFillingItem({ burgerConstructorItems }) {
           price={burgerConstructorItems.price}
           thumbnail={burgerConstructorItems.src}
           handleClose={() => {
-            deleteItem(burgerConstructorItems._id);
+            handleDelete(burgerConstructorItems.uniqueId);
           }}
         />
       </div>

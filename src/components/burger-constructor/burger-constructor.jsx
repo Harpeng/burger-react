@@ -147,7 +147,7 @@ function BurgerConstructor() {
             {fillingItems.map((item, index) => {
               return (
                 <BurgerFillingItem
-                  key={item.id}
+                  key={item.uniqueId}
                   index={index}
                   burgerConstructorItems={item}
                 ></BurgerFillingItem>
