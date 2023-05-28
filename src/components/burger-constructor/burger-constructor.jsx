@@ -6,37 +6,22 @@ import {
   Button,
   ConstructorElement,
   CurrencyIcon,
-  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  DataContext,
-  HandlerContext,
-  PriceContext,
-} from "../../utils/context.jsx";
 import { Modal } from "../modal/modal.jsx";
-import { v4 as uuid } from "uuid";
 import { OrderDetails } from "../order-details/order-details.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  openOrderModal,
   closeOrderModal,
   openOrderDetails,
 } from "../../services/actions/order-details.js";
 import {
-  addIngredient,
-  deleteIngredient,
   addItem,
-  ADD_ITEM,
-  DELETE_ITEM,
   SORT_ITEM,
-  addBuns,
-  addFilling
 } from "../../services/actions/burger-constructor.js";
-import {incrementCount, decreaseCount, setCount} from "../../services/actions/burger-ingredient.js";
 import { useDrop } from "react-dnd";
 import BurgerFillingItem from "./burger-fillings.jsx/burger-fillings";
 import { Reorder } from "framer-motion";
-import loader from "../../images/loader.svg";
+
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -73,23 +58,6 @@ function BurgerConstructor() {
     dispatch(addItem(item));
   };
 
-  // const ingredientsCount = React.useMemo(() => {
-  //   const result = {};
-
-
-  //   fillingItems.forEach(item => {
-  //     result[item.id] = result[item.id] ?? 0;
-  //     result[item.id]++;
-  //   });
-    
-
-  //   if (bun) result[bun.id] = 2;
-
-
-  //   return result;
-  // }, [fillingItems, bun]);
-
-
   const [{isHover}, dropTarget] = useDrop({
     accept: 'item',
 
@@ -101,17 +69,12 @@ function BurgerConstructor() {
     }),
   });
 
-  const deleteElement = (item) => {
-    dispatch({
-      type: DELETE_ITEM,
-      item,
-    });
-  };
 
   let totalPrice = React.useMemo(() => fillingItems.reduce(
     (price, item) => (price += item.price),
     bun ? bun.price*2 : 0),
     [bun, fillingItems]);
+
 
  
 
@@ -120,7 +83,7 @@ function BurgerConstructor() {
       <div className={styles.itemsBar}>
         <ul className={`${styles.list} mt-25 ml-4 mr-4`}>
             <li className={`${styles.item} ml-8`}>
-            {bun ? ( <ConstructorElement
+            {bun && <ConstructorElement
                 id = {bun._id}
                 text={`${bun.name} (верх)`}
                 price={bun.price}
@@ -128,12 +91,14 @@ function BurgerConstructor() {
                 type="top"
                 isLocked={true}
               />
-            ) : (
-              <div className={`${styles.item}`}>
-                <p>выберите булку</p>
-              </div>
+            }
+            {
+              !bun && (
+              <div className={`${styles.clearConstructor}`}>
+              <p className="text text_type_main-default text_color_inactive">Перетащите сюда булку</p>
+            </div>
             )
-          }
+            }
             </li>
         </ul>
           <Reorder.Group
@@ -144,6 +109,13 @@ function BurgerConstructor() {
               dispatch({ type: SORT_ITEM, payload: sortBurgerConstructorItems })
             }
           >
+            {
+              bun && !fillingItems.length && (
+              <div className={`${styles.clearIngredient}`}>
+              <p className="text text_type_main-default text_color_inactive">Перетащите сюда начинку</p>
+            </div>
+            )
+            }
             {fillingItems.map((item, index) => {
               return (
                 <BurgerFillingItem
@@ -154,9 +126,9 @@ function BurgerConstructor() {
               );
             })}
           </Reorder.Group>
-        <ul className={`${styles.list} ml-10 mb-10`}>
+        <ul className={`${styles.list} ml-15 mb-10`}>
             <li className={`${styles.item}`}>
-            {bun ? ( <ConstructorElement
+            {bun && <ConstructorElement
                 id = {bun.id}
                 text={`${bun.name} (верх)`}
                 price={bun.price}
@@ -164,11 +136,6 @@ function BurgerConstructor() {
                 type="bottom"
                 isLocked={true}
               />
-            ) : (
-              <div className={`${styles.item}`}>
-                <p>выберите булку</p>
-              </div>
-            )
           }
             </li>
         </ul>

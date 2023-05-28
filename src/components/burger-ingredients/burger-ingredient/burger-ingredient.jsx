@@ -7,9 +7,8 @@ import {
   } from "@ya.praktikum/react-developer-burger-ui-components";
   import { useDispatch, useSelector } from 'react-redux';
   import { useDrag } from 'react-dnd'
-  import { v4 as uuid } from "uuid";
 
-  function BurgerIngredient({data, id, src, name, price, type, onClick, count}) {
+  function BurgerIngredient({id, src, name, price, type, onClick, count}) {
     const [{ isDragging }, dragRef] = useDrag({
       type: 'item',
       item: {id, src, name, price, type, count},
@@ -20,7 +19,6 @@ import {
 
   const burgerComponents = useSelector(state => state.burgerConstructorReducer);
 
-console.log(burgerComponents.burgerConstructorItems.id);
 
   const myCount = React.useMemo(() => {
     if(type === 'bun') {
@@ -36,11 +34,7 @@ console.log(burgerComponents.burgerConstructorItems.id);
     }
   }, [burgerComponents.bun, burgerComponents.burgerConstructorItems, id, type])
 
-
-
-
-
-
+  
   return (
       <li ref={dragRef} onClick={onClick} className={`${styles.burgerIngredient} mt-6 mb-10`}>
         <img src={src} alt={name} className={`${styles.image} mb-2`} />

@@ -8,9 +8,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-fillings.module.css";
-import { DELETE_ITEM } from "../../../services/actions/burger-constructor.js";
 import {deleteIngredient} from "../../../services/actions/burger-constructor.js";
-import {decreaseCount} from "../../../services/actions/burger-ingredient.js";
 
 function BurgerFillingItem({ burgerConstructorItems }) {
   const dispatch = useDispatch();
@@ -19,9 +17,6 @@ function BurgerFillingItem({ burgerConstructorItems }) {
   const handleDelete = (id) => {
     dispatch(deleteIngredient(id));
   }
-
-  console.log(burgerConstructorItems.uniqueId)
-
 
   return (
     <Reorder.Item
