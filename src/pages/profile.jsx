@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, Navigate } from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie, deleteCookie } from "../utils/cookie";
@@ -26,13 +26,10 @@ function Profile() {
   const [isChange, setIsChange] = React.useState(false);
 
 
-  React.useEffect(() => {
-    if (logoutSubmit) {
-        navigate('/login')
-    }
-  }, [navigate, logoutSubmit]);
+  if (logoutSubmit) {
+    return <Navigate to="/login"/>;
+  }
 
-  console.log(logoutSubmit);
   
   const logout = () => {
     dispatch(fetchLogout(refreshToken));
@@ -81,6 +78,7 @@ function Profile() {
           </NavLink>
           <NavLink
             onClick={logout}
+            to="/login"
             className={`${styles.link} text text_type_main-medium text_color_inactive`}
           >
             Выход
@@ -93,7 +91,7 @@ function Profile() {
       <form onSubmit={profileFormSubmit} className={styles.formContainer}>
         <Input
           onChange={onChange}
-          value={value.name || ""}
+          value={value?.name || ""}
           placeholder={"Имя"}
           name={"name"}
           icon={"EditIcon"}
@@ -103,7 +101,7 @@ function Profile() {
         />
         <EmailInput
           onChange={onChange}
-          value={value.email || ""}
+          value={value?.email || ""}
           name={"email"}
           placeholder={"Логин"}
           icon={"EditIcon"}
@@ -113,7 +111,7 @@ function Profile() {
         />
         <PasswordInput
           onChange={onChange}
-          value={value.password || "*******"}
+          value={value?.password || "*******"}
           name={"password"}
           placeholder={"Пароль"}
           icon={"EditIcon"}

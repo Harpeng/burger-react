@@ -230,6 +230,13 @@ const fetchLogin = (userData) => {
 //проверка авторизации
 export const GET_ACCESS_SUCCESS = "GET_ACCESS_SUCCESS";
 export const GET_ACCESS_FAILED = "GET_ACCESS_FAILED";
+export const GET_ACCESS_LOADED = "GET_ACCESS_LOADED";
+
+const accessLoaded = () => {
+    return {
+      type: GET_ACCESS_LOADED,
+    };
+  };
 
 const accessSuccess = (res) => {
   return {
@@ -262,7 +269,10 @@ const fetchCheckAccess = (accessToken) => {
         console.log(error.message === "jwt expired" || "jwt malformed");
         dispatch(accessFailed(error));
         dispatch(refreshToken("refreshToken"));
-      });
+      })
+      .finally(() => {
+        dispatch(accessLoaded());
+      })
   };
 };
 
@@ -381,7 +391,6 @@ const logoutFailed = () => {
 
 const fetchLogout = (refreshToken) => {
   return (dispatch) => {
-    dispatch(logoutRequest());
     fetch(`${baseUrl}/auth/logout`, {
       method: "POST",
       headers: {
@@ -399,7 +408,10 @@ const fetchLogout = (refreshToken) => {
       .catch((error) => {
         console.log(`Ошибка при загрузке данных: ${error}`);
         dispatch(logoutFailed());
-      });
+      })
+      .finally(() => {
+        dispatch(logoutRequest());
+      })
   };
 };
 

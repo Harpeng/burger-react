@@ -17,9 +17,7 @@ const ingredientDetailsReducer = (state = initialState, action) => {
             }
         }
         default: {
-            return {
-                state,
-            }
+            return state
         }
     }
 }

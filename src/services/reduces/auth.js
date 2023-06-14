@@ -1,3 +1,4 @@
+import { getCookie } from "../../utils/cookie.js";
 import {
   FORGOT_PASSWORD_SET_VALUE,
   FORGOT_PASSWORD_SUBMIT,
@@ -23,11 +24,19 @@ import {
   UPDATE_INFO_SUBMIT,
   UPDATE_INFO_SUCCESS,
   UPDATE_INFO_FAILED,
+  GET_ACCESS_LOADED,
 } from "../actions/auth.js";
 
 export const initialState = {
   //авторизация
-  user: null,
+  user: {
+    email: "",
+    name: "",
+  },
+
+  loaded: false,
+
+  dataUser: null,
 
   userAuth: false,
 
@@ -162,6 +171,7 @@ export const authReducer = (state = initialState, action) => {
           email: "",
           password: "",
         },
+        dataUtser: action.dataUser,
       };
     case REGISTER_FAILED:
       return {
@@ -195,6 +205,7 @@ export const authReducer = (state = initialState, action) => {
           email: action.payload.email,
           name: action.payload.name,
         },
+        dataUtser: action.dataUser,
         userAuth: true,
       };
     case LOGIN_FAILED:
@@ -221,6 +232,11 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         logoutFailed: true,
       };
+    case GET_ACCESS_LOADED:
+      return {
+        ...state,
+        loaded: true,
+      };  
     case GET_ACCESS_SUCCESS:
       return {
         ...state,
@@ -229,6 +245,7 @@ export const authReducer = (state = initialState, action) => {
           email: action.email,
           name: action.name,
         },
+        dataUtser: action.dataUser,
         userAuth: true,
       };
     case GET_ACCESS_FAILED:
@@ -249,6 +266,7 @@ export const authReducer = (state = initialState, action) => {
             email: action.payload.email,
             name: action.payload.name,
           },
+          dataUtser: action.dataUser,
       };
     case UPDATE_INFO_FAILED:
       return {

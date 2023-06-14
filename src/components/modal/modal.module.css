@@ -1,39 +1,41 @@
 .popupContainer {
-    align-self: center;
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    font-family: inherit;
-    background-position: center;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 720px;
-    height: 100%;
-    max-height: 718px;
-    border-radius: 40px;
-    background-color: #1C1C21;
-    z-index: 5;
-
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: inherit;
+  background-position: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+  height: 100%;
+  max-height: 718px;
+  border-radius: 40px;
+  background-color: #1c1c21;
+  z-index: 5;
 }
 
 .closeIcon {
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s linear;
-    padding: 0;
-    position: absolute;
-    top: 51px;
-    right: 46px;
-    opacity: 1;
-    width: 18px;
-    height: 18px;
-    background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s linear;
+  padding: 0;
+  position: absolute;
+  top: 51px;
+  right: 46px;
+  opacity: 1;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
 }
 
 .title {
-    display: flex;
-    align-items: center;
-    max-width: 640px;
+  display: flex;
+  align-items: center;
+  max-width: 640px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }

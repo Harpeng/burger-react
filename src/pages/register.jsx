@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./register.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +11,7 @@ import {
 import { fetchRegister, setRegisterValue } from "../services/actions/auth";
 
 function Register() {
-  const {registerForm, registerSubmit} = useSelector((store) => store.authReducer);
+  const {registerForm, registerSubmit, userAuth} = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -34,6 +34,13 @@ function Register() {
     e.preventDefault();
     dispatch(fetchRegister(registerForm));
   };
+
+  if (userAuth) {
+    return (
+      <Navigate to="/" replace/>
+    )
+  }
+
   return (
     <div className={styles.registerContainer}>
       <h2 className={`text text_type_main-medium text_color_primary mb-6`}>

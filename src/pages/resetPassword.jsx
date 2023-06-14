@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./resetPassword.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchResetPassword, setPasswordValue } from "../services/actions/auth";
@@ -10,7 +10,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ResetPassword() {
-  const { resetPasswordForm, resetPasswordSubmit} = useSelector((store) => store.authReducer);
+  const { resetPasswordForm, resetPasswordSubmit, userAuth} = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
   const onChange = (e) => {
     dispatch(setPasswordValue(e.target.name, e.target.value));
@@ -28,6 +28,12 @@ function ResetPassword() {
     e.preventDefault();
     dispatch(fetchResetPassword(resetPasswordForm));
   };
+
+  if (userAuth) {
+    return (
+      <Navigate to="/" replace/>
+    )
+  }
 
   return (
     <div className={styles.resetContainer}>

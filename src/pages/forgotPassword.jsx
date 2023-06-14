@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./forgotPassword.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchForgotPassword, setFormValue } from "../services/actions/auth.js";
@@ -9,7 +9,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ForgotPassword() {
-  const { forgotPasswordForm } = useSelector((store) => store.authReducer);
+  const { forgotPasswordForm, userAuth } = useSelector((store) => store.authReducer);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -27,6 +28,12 @@ function ForgotPassword() {
     e.preventDefault();
     dispatch(fetchForgotPassword(forgotPasswordForm));
     goToResetPage();
+  }
+
+  if (userAuth) {
+    return (
+      <Navigate to="/" replace/>
+    )
   }
 
 

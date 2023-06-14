@@ -1,43 +1,28 @@
-import React, {useEffect} from "react";
-import { Route, Outlet, Navigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {fetchCheckAccess} from "../../services/actions/auth.js";
-import { getCookie } from "../../utils/cookie";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const ProtectedRouteElement = ({ userAuth}) => {
-    const { user } = useSelector((store) => store.authReducer);
-    const refreshToken = getCookie("refreshToken");
 
-  
-    const dispatch = useDispatch();
+const ProtectedRouteElement = ({ userAuth, to}) => {
+   const {loaded } = useSelector((store) => store.authReducer);
 
-    console.log(user);
-    console.log(userAuth);
-    console.log(refreshToken);
-  
-    useEffect(() => {
-      if (!user && refreshToken) {
-        dispatch(fetchCheckAccess());
-        console.log('привет')
+
+    if (!loaded) {
+        return <p>Загрузка...</p>;
       }
-    }, [refreshToken, user, dispatch]);
   
-    if (!user && !refreshToken && userAuth ) {
+  
+    if (!userAuth) {
       return (
-        <Navigate to="/login" replace/>
+        <Navigate to={to} replace/>
       )
     }
-
-    if (user && !userAuth) {
-        return (
-          <Navigate to="/" replace/>
-        )
-      }
 
     return (
         <Outlet/>
       )
-      
-};
+
+
+  }
 
 export default ProtectedRouteElement;

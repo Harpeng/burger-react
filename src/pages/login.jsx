@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +10,7 @@ import {
 import { fetchLogin, setLoginValue} from "../services/actions/auth";
 
 function Login() {
-  const {loginForm, loginSubmit, loginFailed} = useSelector((store) => store.authReducer);
+  const {loginForm, loginSubmit, userAuth} = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,6 +32,12 @@ function Login() {
     e.preventDefault();
     dispatch(fetchLogin(loginForm));
   };
+
+  // if (userAuth) {
+  //   return (
+  //     <Navigate to="/" replace/>
+  //   )
+  // }
 
   return (
     <div className={styles.loginContainer}>
