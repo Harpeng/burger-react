@@ -26,9 +26,9 @@ function Profile() {
   const [isChange, setIsChange] = React.useState(false);
 
 
-  if (logoutSubmit) {
-    return <Navigate to="/login"/>;
-  }
+//   if (logoutSubmit) {
+//     return <Navigate to="/login"/>;
+//   }
 
   
   const logout = () => {
@@ -36,7 +36,7 @@ function Profile() {
   };
 
   const link = `${styles.link} text text_type_main-medium `;
-  const activelink = "text_color_primary";
+  const activelink = "text_c=olor_primary";
   const inactiveLink = "text_color_inactive ";
 
   const onChange = (e) => {
@@ -78,7 +78,6 @@ function Profile() {
           </NavLink>
           <NavLink
             onClick={logout}
-            to="/login"
             className={`${styles.link} text text_type_main-medium text_color_inactive`}
           >
             Выход

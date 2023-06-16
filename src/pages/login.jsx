@@ -19,13 +19,6 @@ function Login() {
     dispatch(setLoginValue(e.target.name, e.target.value));
   };
 
-  React.useEffect(() => {
-    if(loginSubmit) {
-        navigate("/");
-    }
-  }, [navigate, loginSubmit]);
-
-  console.log(loginSubmit)
 
 
   const submitForm = (e) => {

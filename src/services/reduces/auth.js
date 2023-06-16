@@ -29,10 +29,12 @@ import {
 
 export const initialState = {
   //авторизация
-  user: {
-    email: "",
-    name: "",
-  },
+//   user: {
+//     email: "",
+//     name: "",
+//   },
+
+  user: null,
 
   loaded: false,
 
@@ -240,12 +242,7 @@ export const authReducer = (state = initialState, action) => {
     case GET_ACCESS_SUCCESS:
       return {
         ...state,
-        user: {
-          ...state.user,
-          email: action.email,
-          name: action.name,
-        },
-        dataUtser: action.dataUser,
+        user: action.payload,
         userAuth: true,
       };
     case GET_ACCESS_FAILED:
@@ -261,12 +258,7 @@ export const authReducer = (state = initialState, action) => {
     case UPDATE_INFO_SUCCESS:
       return {
         ...state,
-        user: {
-            ...state.user,
-            email: action.payload.email,
-            name: action.payload.name,
-          },
-          dataUtser: action.dataUser,
+        user: action.payload,
       };
     case UPDATE_INFO_FAILED:
       return {

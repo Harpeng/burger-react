@@ -35,11 +35,11 @@ function Register() {
     dispatch(fetchRegister(registerForm));
   };
 
-  if (userAuth) {
-    return (
-      <Navigate to="/" replace/>
-    )
-  }
+  // if (userAuth) {
+  //   return (
+  //     <Navigate to="/" replace/>
+  //   )
+  // }
 
   return (
     <div className={styles.registerContainer}>

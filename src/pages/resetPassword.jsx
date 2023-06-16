@@ -29,11 +29,11 @@ function ResetPassword() {
     dispatch(fetchResetPassword(resetPasswordForm));
   };
 
-  if (userAuth) {
-    return (
-      <Navigate to="/" replace/>
-    )
-  }
+//   if (userAuth) {
+//     return (
+//       <Navigate to="/" replace/>
+//     )
+//   }
 
   return (
     <div className={styles.resetContainer}>

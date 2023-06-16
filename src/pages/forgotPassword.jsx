@@ -30,11 +30,11 @@ function ForgotPassword() {
     goToResetPage();
   }
 
-  if (userAuth) {
-    return (
-      <Navigate to="/" replace/>
-    )
-  }
+//   if (userAuth) {
+//     return (
+//       <Navigate to="/" replace/>
+//     )
+//   }
 
 
   return (

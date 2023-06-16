@@ -14,9 +14,10 @@ import ProtectedRouteElement from "../ProtectedRoute/protectedRoute.jsx";
 import Ingredient from "../../pages/ingredient-details";
 import { fetchCheckAccess } from "../../services/actions/auth.js";
 import { Modal } from "../modal/modal.jsx";
+import { Auth, UnAuth } from "../ProtectedRoute/protectedRoute.jsx";
 
 function App() {
-  const userAuth = useSelector((store) => store.authReducer.userAuth);
+  // const userAuth = useSelector((store) => store.authReducer.userAuth);
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -31,17 +32,13 @@ function App() {
     <section className={styles.page}>
       <AppHeader />
       <main className={styles.page__content}>
-        <Routes location={background || location}>
+        <Routes>
           <Route path="/" element={<Constructor/>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route
-            element={<ProtectedRouteElement userAuth={userAuth} to="/login" />}
-          >
-            <Route path="/profile" element={<Profile />} />
-          </Route>
+          <Route path="/login" element={<UnAuth component={<Login/>} />} />
+          <Route path="/register" element={<UnAuth component={<Register/>} />} />
+          <Route path="/forgot-password" element={<UnAuth component={<ForgotPassword/>} />} />
+          <Route path="/reset-password" element={<UnAuth component={<ResetPassword/>} />} />
+          <Route path="/profile" element={<Auth component={<Profile/>} />} />
           <Route path="/ingredients/:id" element={<Ingredient />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,5 +1,8 @@
-export function setCookie(name, value, props) {
-    props = props || {};
+export function setCookie(name, value, props = {}) {
+    props = {
+        path: '/',  //задаем корневой адрес для cookies
+        ...props
+      };
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
       const d = new Date();
