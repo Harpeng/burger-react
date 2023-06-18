@@ -173,7 +173,7 @@ export const authReducer = (state = initialState, action) => {
           email: "",
           password: "",
         },
-        dataUtser: action.dataUser,
+        userAuth: true,
       };
     case REGISTER_FAILED:
       return {
@@ -227,7 +227,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         logoutSubmit: false,
         logoutFailed: false,
-        userAuth: false,
+        user: null,
       };
     case LOGOUT_FAILED:
       return {

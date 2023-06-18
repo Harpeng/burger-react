@@ -10,7 +10,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ResetPassword() {
-  const { resetPasswordForm, resetPasswordSubmit, userAuth} = useSelector((store) => store.authReducer);
+  const { resetPasswordForm} = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
   const onChange = (e) => {
     dispatch(setPasswordValue(e.target.name, e.target.value));
@@ -18,22 +18,11 @@ function ResetPassword() {
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if(resetPasswordSubmit) {
-        navigate("/login", { replace: true });
-    }
-  }, [navigate, resetPasswordSubmit]);
-
   const submitResetPassword = (e) => {
     e.preventDefault();
     dispatch(fetchResetPassword(resetPasswordForm));
   };
 
-//   if (userAuth) {
-//     return (
-//       <Navigate to="/" replace/>
-//     )
-//   }
 
   return (
     <div className={styles.resetContainer}>

@@ -11,7 +11,7 @@ import {
 import { fetchRegister, setRegisterValue } from "../services/actions/auth";
 
 function Register() {
-  const {registerForm, registerSubmit, userAuth} = useSelector((store) => store.authReducer);
+  const {registerForm} = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -21,25 +21,11 @@ function Register() {
   }
 
 
-  React.useEffect(() => {
-    if(registerSubmit) {
-        navigate("/login");
-    }
-  }, [navigate, registerSubmit]);
-
-  console.log(registerForm)
-
-
   const submitRegisterForm = (e) => {
     e.preventDefault();
     dispatch(fetchRegister(registerForm));
   };
 
-  // if (userAuth) {
-  //   return (
-  //     <Navigate to="/" replace/>
-  //   )
-  // }
 
   return (
     <div className={styles.registerContainer}>

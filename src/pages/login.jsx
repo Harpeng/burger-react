@@ -19,18 +19,11 @@ function Login() {
     dispatch(setLoginValue(e.target.name, e.target.value));
   };
 
-
-
   const submitForm = (e) => {
     e.preventDefault();
     dispatch(fetchLogin(loginForm));
   };
 
-  // if (userAuth) {
-  //   return (
-  //     <Navigate to="/" replace/>
-  //   )
-  // }
 
   return (
     <div className={styles.loginContainer}>

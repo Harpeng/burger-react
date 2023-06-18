@@ -10,14 +10,12 @@ import Register from "../../pages/register";
 import ForgotPassword from "../../pages/forgotPassword";
 import ResetPassword from "../../pages/resetPassword";
 import Profile from "../../pages/profile";
-import ProtectedRouteElement from "../ProtectedRoute/protectedRoute.jsx";
 import Ingredient from "../../pages/ingredient-details";
 import { fetchCheckAccess } from "../../services/actions/auth.js";
 import { Modal } from "../modal/modal.jsx";
 import { Auth, UnAuth } from "../ProtectedRoute/protectedRoute.jsx";
 
 function App() {
-  // const userAuth = useSelector((store) => store.authReducer.userAuth);
   const dispatch = useDispatch();
 
   const location = useLocation();

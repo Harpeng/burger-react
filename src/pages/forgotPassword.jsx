@@ -9,7 +9,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ForgotPassword() {
-  const { forgotPasswordForm, userAuth } = useSelector((store) => store.authReducer);
+  const { forgotPasswordForm } = useSelector((store) => store.authReducer);
 
   const dispatch = useDispatch();
 
@@ -29,13 +29,6 @@ function ForgotPassword() {
     dispatch(fetchForgotPassword(forgotPasswordForm));
     goToResetPage();
   }
-
-//   if (userAuth) {
-//     return (
-//       <Navigate to="/" replace/>
-//     )
-//   }
-
 
   return (
     <div className={styles.forgotPasswordContainer}>

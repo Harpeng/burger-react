@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, NavLink, useNavigate, Navigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getCookie, deleteCookie } from "../utils/cookie";
+import { getCookie } from "../utils/cookie";
 import { fetchLogout, fetchUpdateUserInfo } from "../services/actions/auth";
 import {
   EmailInput,
@@ -12,10 +12,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function Profile() {
-  const { user, logoutSubmit } = useSelector((store) => store.authReducer);
+  const { user } = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const [value, setValue] = React.useState(user);
 
@@ -25,18 +23,13 @@ function Profile() {
 
   const [isChange, setIsChange] = React.useState(false);
 
-
-//   if (logoutSubmit) {
-//     return <Navigate to="/login"/>;
-//   }
-
   
   const logout = () => {
     dispatch(fetchLogout(refreshToken));
   };
 
   const link = `${styles.link} text text_type_main-medium `;
-  const activelink = "text_c=olor_primary";
+  const activelink = "text_color_primary";
   const inactiveLink = "text_color_inactive ";
 
   const onChange = (e) => {
