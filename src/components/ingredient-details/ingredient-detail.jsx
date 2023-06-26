@@ -7,40 +7,30 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchItems } from "../../services/actions/burger-ingredient.js";
 
-export function IngredientDetails({ item }) {
-  // const dispatch = useDispatch();
-  // const location = useLocation();
+export function IngredientDetails() {
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  // const ingredient = location.state?.ingredient;
-  // const {dataBurger } = useSelector((store) => ({
-  //   dataBurger: store.burgerIngredientsReducer.dataBurger,
-  // }));
-  // // ingredientDetailsReducer item
-  // // burgerIngredientsReducer dataBurger
-  // const { id } = useParams();
-  // const [ingredientData, setIngredientData] = useState(ingredient);
+  const ingredient = location.state?.ingredient;
+  const { dataBurger } = useSelector((store) => ({
+    dataBurger: store.burgerIngredientsReducer.dataBurger,
+  }));
+  const { id } = useParams();
+  const [item, setItem] = useState(ingredient);
 
-  // React.useEffect(() => {
-  //   if (ingredient) {
-  //     setIngredientData(ingredient);
-  //   } else if (dataBurger.length) {
-  //     setIngredientData(dataBurger.find((item) => item.id === id));
-  //   } else {
-  //     dispatch(fetchItems());
-  //   }
-  // }, [dispatch, id, ingredient, dataBurger]);
-
-  // const dataBurger = useSelector(
-  //   (store) => store.burgerIngredientsReducer.dataBurger
-  // );
-
-  // const { id } = useParams();
-
-  // const currentIngredient = dataBurger.find((item) => item.id === id);
-
-  // const location = useLocation();
+  useEffect(() => {
+    if (ingredient) {
+      setItem(ingredient);
+    } else if (dataBurger.length) {
+      setItem(dataBurger.find(item => item._id === id))
+    } else {
+      dispatch(fetchItems());
+    }
+  }, [dispatch, id, ingredient, dataBurger]);
+  
 
   return (
+    item && (
       <div className={`pl-25 pr-25 pb-15 ${styles.ingredientBlock}`}>
         <img src={item.image_large} alt={item.name} className={"mb-4"} />
         <h3 className={`${styles.name} text text_type_main-medium mb-8`}>
@@ -89,7 +79,8 @@ export function IngredientDetails({ item }) {
           </li>
         </ul>
       </div>
-    );
+    )
+  )
 }
 
 // IngredientDetails.propTypes = {

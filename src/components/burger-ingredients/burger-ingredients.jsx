@@ -58,10 +58,10 @@ function BurgerIngredients() {
     dispatch(openIngredientDetails(item));
   };
 
-  const closePopup = (e) => {
-    dispatch(closeIngredientDetails());
-    navigate("/");
-  };
+  // const closePopup = (e) => {
+  //   dispatch(closeIngredientDetails());
+  //   navigate("/");
+  // };
 
   const [current, setCurrent] = React.useState("bun");
   const handleClick = (tab) => {
@@ -123,11 +123,11 @@ function BurgerIngredients() {
           />
         </div>
       </div>
-      {item &&  (
+      {/* {item &&  (
         <Modal closePopup={closePopup} title="Детали ингредиента">
           <IngredientDetails  item={item} />
         </Modal>
-      )}
+      )} */}
     </section>
   );
 }

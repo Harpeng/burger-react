@@ -43,8 +43,9 @@ function BurgerIngredient({ id, src, name, price, type, onClick, count }) {
 
   return (
     <NavLink
+      key={id}
       to={`/ingredients/${id}`}
-      state={{ from: "/" }}
+      state={{ background: location }}
       className={styles.link}
     >
       <li
