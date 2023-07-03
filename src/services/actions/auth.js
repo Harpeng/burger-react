@@ -1,4 +1,4 @@
-import { baseUrl } from "../../utils/utils.js";
+import { baseUrl,resetPasswordUrl, forgotPasswordUrl, checkAccessUrl, tokenUrl, logoutUrl, loginUrl, registerUrl, orderUrl } from "../../utils/utils.js";
 import { checkResponce } from "../../utils/api.js";
 import { setCookie, getCookie, deleteCookie } from "../../utils/cookie.js";
 
@@ -36,10 +36,10 @@ const submitFailedForm = () => {
   };
 };
 
-const fetchForgotPassword = (email) => {
+const fetchForgotPassword = (email, callback) => {
   return (dispatch) => {
     dispatch(submitForm());
-    fetch(`${baseUrl}/password-reset`, {
+    fetch(forgotPasswordUrl, {
       method: "POST",
       headers: {
         authorization: "",
@@ -50,6 +50,7 @@ const fetchForgotPassword = (email) => {
       .then(checkResponce)
       .then((data) => {
         dispatch(submitSuccesForm(data));
+        callback();
       })
       .catch((error) => {
         console.log(`Ошибка при загрузке данных: ${error}`);
@@ -93,7 +94,7 @@ const submitFailedResetPassword = () => {
 const fetchResetPassword = (password) => {
   return (dispatch) => {
     dispatch(submitResetPassword());
-    fetch(`${baseUrl}/password-reset/reset`, {
+    fetch(resetPasswordUrl, {
       method: "POST",
       headers: {
         authorization: "",
@@ -144,10 +145,10 @@ const registerFailed = () => {
   };
 };
 
-const fetchRegister = (userData) => {
+const fetchRegister = (userData, callback) => {
   return (dispatch) => {
     dispatch(registerSubmit());
-    fetch(`${baseUrl}/auth/register`, {
+    fetch(registerUrl, {
       method: "POST",
       headers: {
         authorization: "",
@@ -162,6 +163,7 @@ const fetchRegister = (userData) => {
       })
       .then(() => {
         dispatch(registerSuccess);
+        callback();
       })
       .catch((error) => {
         console.log(`Ошибка при загрузке данных: ${error}`);
@@ -206,7 +208,7 @@ const loginFailed = () => {
 const fetchLogin = (userData) => {
   return (dispatch) => {
     dispatch(loginSubmit());
-    fetch(`${baseUrl}/auth/login`, {
+    fetch(loginUrl, {
       method: "POST",
       headers: {
         authorization: "",
@@ -253,7 +255,7 @@ const accessFailed = () => {
 
 const fetchCheckAccess = (accessToken) => {
   return (dispatch) => {
-    fetch(`${baseUrl}/auth/user`, {
+    fetch(checkAccessUrl, {
       method: "GET",
       headers: {
         authorization: "Bearer " + getCookie("accessToken"),
@@ -266,9 +268,9 @@ const fetchCheckAccess = (accessToken) => {
         dispatch(accessSuccess(res));
       })
       .catch((error) => {
-        console.log(error.message === "jwt expired" || "jwt malformed");
-        dispatch(accessFailed(error));
-        dispatch(refreshToken("refreshToken"));
+        if(error.message === "jwt expired" || "jwt malformed") {
+            dispatch(refreshToken("refreshToken"));
+        }
       })
       .finally(() => {
         dispatch(accessLoaded());
@@ -279,7 +281,7 @@ const fetchCheckAccess = (accessToken) => {
 //обновление токена
 const refreshToken = (refreshToken) => {
   return (dispatch) => {
-    fetch(`${baseUrl}/auth/token`, {
+    fetch(tokenUrl, {
       method: "POST",
       headers: {
         authorization: "",
@@ -327,7 +329,7 @@ const updateFailed = () => {
 const fetchUpdateUserInfo = (userData) => {
   return (dispatch) => {
     dispatch(updateRequest());
-    fetch(`${baseUrl}/auth/user`, {
+    fetch(checkAccessUrl, {
       method: "PATCH",
       headers: {
         authorization: "Bearer " + getCookie("accessToken"),
@@ -343,7 +345,7 @@ const fetchUpdateUserInfo = (userData) => {
       .catch((error) => {
         if (error.message === "jwt expired") {
           dispatch(refreshToken("refreshToken")).then(() => {
-            fetch(`${baseUrl}/auth/user`, {
+            fetch(checkAccessUrl, {
               method: "PATCH",
               headers: {
                 authorization: "Bearer " + getCookie("accessToken"),
@@ -391,7 +393,7 @@ const logoutFailed = () => {
 
 const fetchLogout = (refreshToken) => {
   return (dispatch) => {
-    fetch(`${baseUrl}/auth/logout`, {
+    fetch(logoutUrl, {
       method: "POST",
       headers: {
         authorization: "",

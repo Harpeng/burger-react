@@ -7,7 +7,7 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { fetchLogin, setLoginValue} from "../services/actions/auth";
+import { fetchLogin, setLoginValue} from "../../services/actions/auth";
 
 function Login() {
   const {loginForm, loginSubmit, userAuth} = useSelector((store) => store.authReducer);

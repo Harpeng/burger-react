@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./app.module.css";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header.jsx";
-import Constructor from "../../pages/constructor.jsx";
-import NotFound from "../../pages/notFound.jsx";
-import Login from "../../pages/login";
-import Register from "../../pages/register";
-import ForgotPassword from "../../pages/forgotPassword";
-import ResetPassword from "../../pages/resetPassword";
-import Profile from "../../pages/profile";
-import Ingredient from "../../pages/ingredient-details";
+import Constructor from "../../pages/constructor/constructor.jsx";
+import NotFound from "../../pages/notFound/notFound.jsx";
+import Login from "../../pages/login/login";
+import Register from "../../pages/register/register";
+import ForgotPassword from "../../pages/forgotPassword/forgotPassword";
+import ResetPassword from "../../pages/resetPassword/resetPassword";
+import Profile from "../../pages/profile/profile";
+import Ingredient from "../../pages/ingredient-details/ingredient-details";
 import { fetchCheckAccess } from "../../services/actions/auth.js";
 import { Modal } from "../modal/modal.jsx";
 import { Auth, UnAuth } from "../ProtectedRoute/protectedRoute.jsx";
@@ -42,7 +42,7 @@ function App() {
       <AppHeader />
       <main className={styles.page__content}>
         <Routes location={background || location}>
-          <Route path="/" element={<Constructor />} />
+          <Route path="/" element={<Auth component={<Constructor />} />}/>
           <Route path="/login" element={<UnAuth component={<Login />} />} />
           <Route
             path="/register"

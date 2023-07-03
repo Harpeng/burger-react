@@ -10,7 +10,7 @@ import {
 const initialState = {
   isLoading: false,
   dataBurger: [],
-  error: "",
+  error: null,
 };
 
 const burgerIngredientsReducer = (state = initialState, action) => {

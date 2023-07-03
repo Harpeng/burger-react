@@ -8,7 +8,7 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { fetchRegister, setRegisterValue } from "../services/actions/auth";
+import { fetchRegister, setRegisterValue } from "../../services/actions/auth";
 
 function Register() {
   const {registerForm} = useSelector((store) => store.authReducer);
@@ -23,7 +23,7 @@ function Register() {
 
   const submitRegisterForm = (e) => {
     e.preventDefault();
-    dispatch(fetchRegister(registerForm));
+    dispatch(fetchRegister(registerForm, () => navigate("/login")));
   };
 
 

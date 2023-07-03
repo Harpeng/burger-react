@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink} from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getCookie } from "../utils/cookie";
-import { fetchLogout, fetchUpdateUserInfo } from "../services/actions/auth";
+import { getCookie } from "../../utils/cookie";
+import { fetchLogout, fetchUpdateUserInfo } from "../../services/actions/auth";
 import {
   EmailInput,
   PasswordInput,

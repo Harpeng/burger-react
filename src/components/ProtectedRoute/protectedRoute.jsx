@@ -1,28 +1,10 @@
 import React from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 
 const ProtectedRouteElement = ({ unAuth = false, component }) => {
-//    const {loaded } = useSelector((store) => store.authReducer);
-
-
-//     if (!loaded) {
-//         return <p>Загрузка...</p>;
-//       }
-  
-  
-//     if (!userAuth) {
-//       return (
-//         <Navigate to={to} replace/>
-//       )
-//     }
-
-//     return (
-//         <Outlet/>
-//       )
-
-
 const userAuth = useSelector((store) => store.authReducer.userAuth);
 const user = useSelector((store) => store.authReducer.user);
 const location = useLocation();
@@ -56,5 +38,10 @@ export const UnAuth = ({ component }) => (
 <ProtectedRouteElement unAuth={true} component={component} />
 );
 
+
+ProtectedRouteElement.propTypes = {
+    unAuth: PropTypes.bool,
+    component: PropTypes.element,
+  };
 
 export default ProtectedRouteElement;

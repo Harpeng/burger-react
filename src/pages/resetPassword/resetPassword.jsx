@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./resetPassword.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchResetPassword, setPasswordValue } from "../services/actions/auth";
+import { fetchResetPassword, setPasswordValue } from "../../services/actions/auth";
 import {
   PasswordInput,
   Input,

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./forgotPassword.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchForgotPassword, setFormValue } from "../services/actions/auth.js";
+import { fetchForgotPassword, setFormValue } from "../../services/actions/auth.js";
 import {
   EmailInput,
   Button,
@@ -26,8 +26,7 @@ function ForgotPassword() {
 
   function submitForgotPassword(e) {
     e.preventDefault();
-    dispatch(fetchForgotPassword(forgotPasswordForm));
-    goToResetPage();
+    dispatch(fetchForgotPassword(forgotPasswordForm, {onSuccess: () => goToResetPage()}));
   }
 
   return (

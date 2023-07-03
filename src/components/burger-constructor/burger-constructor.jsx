@@ -22,7 +22,6 @@ import { useDrop } from "react-dnd";
 import BurgerFillingItem from "./burger-fillings.jsx/burger-fillings";
 import { Reorder } from "framer-motion";
 
-
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const { bun, fillingItems } = useSelector((store) => ({
@@ -30,15 +29,14 @@ function BurgerConstructor() {
     fillingItems: store.burgerConstructorReducer.burgerConstructorItems,
   }));
 
-  const {items} = useSelector((store) => ({
+
+  const { items } = useSelector((store) => ({
     items: store.burgerIngredientsReducer.dataBurger,
-  }))
-  
+  }));
 
   const state = useSelector((store) => store);
 
   const getNubmerId = state.orderDetailsReducer.servOrder;
-
 
   const orderOverlay = state.orderDetailsReducer.openModal;
 
@@ -46,20 +44,17 @@ function BurgerConstructor() {
     dispatch(closeOrderModal());
   };
 
-
   const getOrder = () => {
-    const arrayId = [
-      ...items.map((item) => item._id),
-    ];
-   dispatch(openOrderDetails(arrayId));
+    const arrayId = [...items.map((item) => item._id)];
+    dispatch(openOrderDetails(arrayId));
   };
 
   const handleDrop = (item) => {
     dispatch(addItem(item));
   };
 
-  const [{isHover}, dropTarget] = useDrop({
-    accept: 'item',
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: "item",
 
     drop(item) {
       handleDrop(item);
@@ -69,82 +64,86 @@ function BurgerConstructor() {
     }),
   });
 
-
-  let totalPrice = React.useMemo(() => fillingItems.reduce(
-    (price, item) => (price += item.price),
-    bun ? bun.price*2 : 0),
-    [bun, fillingItems]);
-
-
- 
+  const totalPrice = React.useMemo(
+    () =>
+      fillingItems.reduce(
+        (price, item) => (price += item.price),
+        bun ? bun.price * 2 : 0
+      ),
+    [bun, fillingItems]
+  );
 
   return (
     <section ref={dropTarget} className={`${styles.burgerConstructor}`}>
       <div className={styles.itemsBar}>
         <ul className={`${styles.list} mt-25 ml-4 mr-4`}>
-            <li className={`${styles.item} ml-8`}>
-            {bun && <ConstructorElement
-                id = {bun._id}
+          <li className={`${styles.item} ml-8`}>
+            {bun && (
+              <ConstructorElement
+                id={bun._id}
                 text={`${bun.name} (верх)`}
                 price={bun.price}
                 thumbnail={bun.src}
                 type="top"
                 isLocked={true}
               />
-            }
-            {
-              !bun && (
+            )}
+            {!bun && (
               <div className={`${styles.clearConstructor}`}>
-              <p className="text text_type_main-default text_color_inactive">Перетащите сюда булку</p>
-            </div>
-            )
-            }
-            </li>
+                <p className="text text_type_main-default text_color_inactive">
+                  Перетащите сюда булку
+                </p>
+              </div>
+            )}
+          </li>
         </ul>
-          <Reorder.Group
-            className={`${styles.list} ${styles.itemUnlock} ml-4 mr-4`}
-            axis="y"
-            values={fillingItems}
-            onReorder={(sortBurgerConstructorItems) =>
-              dispatch({ type: SORT_ITEM, payload: sortBurgerConstructorItems })
-            }
-          >
-            {
-              bun && !fillingItems.length && (
-              <div className={`${styles.clearIngredient}`}>
-              <p className="text text_type_main-default text_color_inactive">Перетащите сюда начинку</p>
+        <Reorder.Group
+          className={`${styles.list} ${styles.itemUnlock} ml-4 mr-4`}
+          axis="y"
+          values={fillingItems}
+          onReorder={(sortBurgerConstructorItems) =>
+            dispatch({ type: SORT_ITEM, payload: sortBurgerConstructorItems })
+          }
+        >
+          {bun && !fillingItems.length && (
+            <div className={`${styles.clearIngredient}`}>
+              <p className="text text_type_main-default text_color_inactive">
+                Перетащите сюда начинку
+              </p>
             </div>
-            )
-            }
-            {fillingItems.map((item, index) => {
-              return (
-                <BurgerFillingItem
-                  key={item.uniqueId}
-                  index={index}
-                  burgerConstructorItems={item}
-                ></BurgerFillingItem>
-              );
-            })}
-          </Reorder.Group>
+          )}
+          {fillingItems.map((item, index) => {
+            return (
+              <BurgerFillingItem
+                key={item.uniqueId}
+                index={index}
+                burgerConstructorItems={item}
+              ></BurgerFillingItem>
+            );
+          })}
+        </Reorder.Group>
         <ul className={`${styles.list} ml-15 mb-10`}>
-            <li className={`${styles.item}`}>
-            {bun && <ConstructorElement
-                id = {bun.id}
+          <li className={`${styles.item}`}>
+            {bun && (
+              <ConstructorElement
+                id={bun.id}
                 text={`${bun.name} (верх)`}
                 price={bun.price}
                 thumbnail={bun.src}
                 type="bottom"
                 isLocked={true}
               />
-          }
-            </li>
+            )}
+          </li>
         </ul>
       </div>
       {fillingItems[0] && (
         <div className={`${styles.order} mr-4`}>
-          <p className={`text text_type_digits-medium mr-3`}>{totalPrice ? totalPrice : 0}</p>
+          <p className={`text text_type_digits-medium mr-3`}>
+            {totalPrice ? totalPrice : 0}
+          </p>
           <div className={`${styles.logo} pr-10`}>
-            <CurrencyIcon type="primary"/>
+            <CurrencyIcon type="primary" />
           </div>
           <Button
             htmlType="button"
@@ -175,4 +174,3 @@ BurgerConstructor.propTypes = {
 };
 
 export default BurgerConstructor;
-
