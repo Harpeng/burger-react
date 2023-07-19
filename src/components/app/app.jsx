@@ -18,6 +18,8 @@ import { IngredientDetails } from "../ingredient-details/ingredient-detail";
 import {
   closeIngredientDetails,
 } from "../../services/actions/ingredient-details.js";
+import Feed from "../../pages/feed/feed";
+import Order from "../../pages/order/order";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +60,8 @@ function App() {
           />
           <Route path="/profile" element={<Auth component={<Profile />} />} />
           <Route path="/ingredients/:id" element={<Ingredient />} />
+          <Route path="/feed" element={<Auth component={<Feed />} />} />
+          <Route path="/feed/:id" element={<Auth component={<Order />} />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
         {background && (

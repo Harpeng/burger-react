@@ -4,13 +4,15 @@ import  ingredientDetailsReducer  from './ingredient-details.js';
 import { burgerConstructorReducer } from './burger-constructor.js';
 import  orderDetailsReducer  from './order-details.js';
 import { authReducer } from "./auth.js";
+import socketReducer from "./socketReduce.js"
 
 const rootReducers = combineReducers({
     burgerIngredientsReducer,
     ingredientDetailsReducer,
     burgerConstructorReducer,
     orderDetailsReducer,
-    authReducer
+    authReducer,
+    socketReducer,
 })
 
 export default rootReducers;

@@ -1,4 +1,7 @@
+import { getCookie } from "./cookie.js";
+
 const baseUrl = 'https://norma.nomoreparties.space/api';
+const wsUrl = 'wss://norma.nomoreparties.space/orders';
 const ingredientsUrl = `${baseUrl}/ingredients`;
 const orderUrl = `${baseUrl}/orders`;
 const registerUrl = `${baseUrl}/auth/register`;
@@ -9,5 +12,8 @@ const checkAccessUrl = `${baseUrl}/auth/user`;
 const forgotPasswordUrl = `${baseUrl}/password-reset`;
 const resetPasswordUrl = `${baseUrl}/password-reset/reset`;
 
-export {baseUrl,resetPasswordUrl, forgotPasswordUrl, checkAccessUrl, tokenUrl, logoutUrl, loginUrl, registerUrl, orderUrl, ingredientsUrl };
+const wsUrlAll = `${wsUrl}/all`;
+const wsUrlProfile = `${wsUrl}?token=${getCookie("accessToken")}`;
+
+export {wsUrlProfile, wsUrlAll, baseUrl,resetPasswordUrl, forgotPasswordUrl, checkAccessUrl, tokenUrl, logoutUrl, loginUrl, registerUrl, orderUrl, ingredientsUrl };
 
