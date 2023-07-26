@@ -5,7 +5,8 @@ import {
   SORT_ITEM,
   ADD_FILLING,
   ADD_BUN,
-  addItem
+  addItem,
+  RESET_INGREDIENT
 } from "../actions/burger-constructor.js";
 
 export const initialState = {
@@ -44,6 +45,13 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         ...state,
         burgerConstructorItems: action.payload,
       };
+    case RESET_INGREDIENT: {
+      return {
+        ...state,
+        burgerConstructorItems: [],
+        bun: null,
+      }
+    }  
     default: {
       return state;
     }

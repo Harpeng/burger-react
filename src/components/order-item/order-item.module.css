@@ -1,5 +1,16 @@
-.element {
-    margin-left: -15px;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .container__element {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .container__image {
     width: 64px;
     height: 64px;
     background: #131316;
@@ -10,8 +21,10 @@
     border: 2px solid rgba(128, 26, 178, 1);
   }
   
-  .element:first-child {
-    margin: 0;
+  .counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
   
   .image {
@@ -24,11 +37,6 @@
     object-fit: contain;
   }
   
-  .text {  
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    z-index: 15;
+  .text {
+    max-width: 320px;
   }

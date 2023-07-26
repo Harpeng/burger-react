@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../utils/cookie";
@@ -10,6 +10,8 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import OrderConsist from "../../components/order-consist/order-consist";
+import { Modal } from "../../components/modal/modal";
 
 function Profile() {
   const { user } = useSelector((store) => store.authReducer);
@@ -23,7 +25,6 @@ function Profile() {
 
   const [isChange, setIsChange] = React.useState(false);
 
-  
   const logout = () => {
     dispatch(fetchLogout(refreshToken));
   };
@@ -32,20 +33,30 @@ function Profile() {
   const activelink = "text_color_primary";
   const inactiveLink = "text_color_inactive ";
 
+  const location = useLocation();
+
   const onChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
     setIsChange(true);
   };
 
-    function onReset() {
-      setValue({ name: user.name, email: user.email });
-      setIsChange(false);
-    }
+  function onReset() {
+    setValue({ name: user.name, email: user.email });
+    setIsChange(false);
+  }
 
   function profileFormSubmit(e) {
     e.preventDefault();
     dispatch(fetchUpdateUserInfo(value));
     setIsChange(false);
+  }
+
+  const myOrder = useSelector(
+    (store) => store.orderDetailsReducer.servOrder
+  );
+
+  function closeModal(e) {
+    e.stopPropagation();
   }
 
   return (
@@ -66,6 +77,8 @@ function Profile() {
             className={({ isActive }) =>
               link + (isActive ? activelink : inactiveLink)
             }
+            state={{ order: true }}
+            end
           >
             История заказов
           </NavLink>
@@ -80,52 +93,61 @@ function Profile() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <form onSubmit={profileFormSubmit} className={styles.formContainer}>
-        <Input
-          onChange={onChange}
-          value={value?.name || ""}
-          placeholder={"Имя"}
-          name={"name"}
-          icon={"EditIcon"}
-          extraClass="mb-6"
-          onIconClick={() => setInput({ ...input, name: !input.name })}
-          disabled={input.name ? false : true}
-        />
-        <EmailInput
-          onChange={onChange}
-          value={value?.email || ""}
-          name={"email"}
-          placeholder={"Логин"}
-          icon={"EditIcon"}
-          extraClass="mb-6"
-          onIconClick={() => setInput({ ...input, email: !input.email })}
-          disabled={input.email ? false : true}
-        />
-        <PasswordInput
-          onChange={onChange}
-          value={value?.password || "*******"}
-          name={"password"}
-          placeholder={"Пароль"}
-          icon={"EditIcon"}
-          extraClass="mb-6"
-          disabled
-        />
-        {isChange && (
-          <div className={`mt-6 mr-4 ${styles.buttonBlock}`}>
-            <Button
-              size="medium"
-              htmlType="button"
-              type="secondary"
-              onClick={onReset}
-            >
-              Отмена
-            </Button>
-            <Button htmlType="submit" size="medium">
-              Сохранить
-            </Button>
-          </div>
-        )}
-      </form>
+      {location.state ? (
+        <Outlet />
+      ) : (
+        <form onSubmit={profileFormSubmit} className={styles.formContainer}>
+          <Input
+            onChange={onChange}
+            value={value?.name || ""}
+            placeholder={"Имя"}
+            name={"name"}
+            icon={"EditIcon"}
+            extraClass="mb-6"
+            onIconClick={() => setInput({ ...input, name: !input.name })}
+            disabled={input.name ? false : true}
+          />
+          <EmailInput
+            onChange={onChange}
+            value={value?.email || ""}
+            name={"email"}
+            placeholder={"Логин"}
+            icon={"EditIcon"}
+            extraClass="mb-6"
+            onIconClick={() => setInput({ ...input, email: !input.email })}
+            disabled={input.email ? false : true}
+          />
+          <PasswordInput
+            onChange={onChange}
+            value={value?.password || "*******"}
+            name={"password"}
+            placeholder={"Пароль"}
+            icon={"EditIcon"}
+            extraClass="mb-6"
+            disabled
+          />
+          {isChange && (
+            <div className={`mt-6 mr-4 ${styles.buttonBlock}`}>
+              <Button
+                size="medium"
+                htmlType="button"
+                type="secondary"
+                onClick={onReset}
+              >
+                Отмена
+              </Button>
+              <Button htmlType="submit" size="medium">
+                Сохранить
+              </Button>
+            </div>
+          )}
+        </form>
+      )}
+      {myOrder && (
+        <Modal onCloseModal={closeModal}>
+          <OrderConsist order={myOrder} />
+        </Modal>
+      )}
     </div>
   );
 }

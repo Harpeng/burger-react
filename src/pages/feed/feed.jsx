@@ -4,7 +4,7 @@ import ListFeed from "../../components/list-feed/list-feed";
 import OrderLine from "../../components/order-line/order-line.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    wsConnectionStart,
+  wsConnectionStart,
   wsConnectionClose,
 } from "../../services/actions/socketAction";
 import { wsUrlAll } from "../../utils/utils";
@@ -36,7 +36,7 @@ function Feed() {
     );
   }, [orders]);
 
-  console.log(wsUrlAll)
+  console.log(orders);
 
   React.useEffect(() => {
     dispatch(wsConnectionStart(wsUrlAll));
@@ -45,11 +45,14 @@ function Feed() {
     };
   }, []);
 
-
-
   return (
     <div className={styles.feed}>
-      <ListFeed orders={orders} isFeedList={false} />
+      <div className={styles.list__container}>
+        <h2 className={`${styles.title} text text_type_main-large pt-10 pb-5`}>
+          Лента Заказов
+        </h2>
+        <ListFeed orders={orders} isOrder={false} />
+      </div>
       <OrderLine
         doneList={doneList}
         workList={workList}

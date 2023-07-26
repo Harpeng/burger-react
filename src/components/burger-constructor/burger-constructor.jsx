@@ -21,6 +21,7 @@ import {
 import { useDrop } from "react-dnd";
 import BurgerFillingItem from "./burger-fillings.jsx/burger-fillings";
 import { Reorder } from "framer-motion";
+import { RESET_INGREDIENT } from "../../services/actions/burger-constructor.js";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ function BurgerConstructor() {
     bun: store.burgerConstructorReducer.bun,
     fillingItems: store.burgerConstructorReducer.burgerConstructorItems,
   }));
-
 
   const { items } = useSelector((store) => ({
     items: store.burgerIngredientsReducer.dataBurger,
@@ -42,10 +42,11 @@ function BurgerConstructor() {
 
   const closeModal = () => {
     dispatch(closeOrderModal());
+    dispatch({ type: RESET_INGREDIENT });
   };
 
   const getOrder = () => {
-    const arrayId = [...items.map((item) => item._id)];
+    const arrayId = [bun.id, ...fillingItems.map((item) => item.id), bun.id];
     dispatch(openOrderDetails(arrayId));
   };
 
@@ -157,12 +158,7 @@ function BurgerConstructor() {
       )}
       {orderOverlay && (
         <Modal closePopup={closeModal} title={""}>
-          {state.orderDetailsReducer.orderRequest && "Загрузка..."}
-          {state.orderDetailsReducer.orderError && "Произошла ошибка"}
-          {!state.orderDetailsReducer.orderRequest &&
-            !state.orderDetailsReducer.orderError && (
               <OrderDetails orderNumber={getNubmerId} />
-            )}
         </Modal>
       )}
     </section>

@@ -7,10 +7,6 @@ function ListFeed({ isFeedList, orders }) {
 
     console.log(orders)
   return (
-    <section className={styles.list__container}>
-      <h2 className={`${styles.title} text text_type_main-large pt-10 pb-5`}>
-        Лента Заказов
-      </h2>
       <ul className={styles.list}>
         {orders.map((order) => {
           return (
@@ -18,7 +14,6 @@ function ListFeed({ isFeedList, orders }) {
           );
         })}
       </ul>
-    </section>
   );
 }
 

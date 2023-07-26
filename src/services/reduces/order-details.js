@@ -4,7 +4,8 @@ import {
   GET_ORDER_DATA_ERROR,
   CLOSE_ORDER_MODAL,
   OPEN_ORDER_MODAL,
-  ORDER_ERROR
+  ORDER_ERROR,
+  RESET_ORDER,
 } from "../actions/order-details.js";
 
 const initialState = {
@@ -57,6 +58,12 @@ const orderDetailsReducer = (state = initialState, action) => {
           orderRequest: false,
           orderError: true,
         };
+      }
+      case RESET_ORDER: {
+        return {
+          ...state,
+          servOrder: null,
+        }
       }
     default: {
       return state;

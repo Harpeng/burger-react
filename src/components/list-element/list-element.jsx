@@ -5,12 +5,10 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import bun from "../../images/bun.png";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import OrderInformation from "../order-information/order-information";
 
-
-function ListElement({ isFeedList, order }) {
+function ListElement({ isOrder, order }) {
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.dataBurger
   );
@@ -27,6 +25,9 @@ function ListElement({ isFeedList, order }) {
     return list;
   };
 
+  const orderList = getOrderList();
+
+  console.log(orderList);
 
   const orderStatus = () => {
     if (order.status === "done") {
@@ -36,16 +37,23 @@ function ListElement({ isFeedList, order }) {
     }
   };
 
-  const orderPrice = getOrderList.reduce((count, item) => {
-    return count + item.price;
+  const orderPrice = orderList.reduce((price, item) => {
+    return price + item.price;
   }, 0);
 
   const location = useLocation();
 
-
   return (
     <li className={styles.container}>
-      <Link to="" className={styles.link}>
+      <Link
+        to={isOrder ? `/profile/orders/${order._id}` : `/feed/${order._id}`}
+        state={
+            isOrder
+            ? { locationProfile: location }
+            : { locationFeed: location }
+        }
+        className={styles.link}
+      >
         <div className={styles.order__data}>
           <p className="text text_type_digits-default">{`#${order.number}`}</p>
           <FormattedDate
@@ -53,20 +61,18 @@ function ListElement({ isFeedList, order }) {
             className="text text_type_main-default text_color_inactive"
           />
         </div>
-        <h3 className="text text_type_main-medium">
-        {order.name}
-        </h3>
-        {isFeedList && (
-            <p
-              className={`text text_type_main-default ${
-                order.status === "done" ? styles.status : undefined
-              }`}
-            >
-              {orderStatus}
-            </p>
-          )}
+        <h3 className="text text_type_main-medium">{order.name}</h3>
+        {isOrder && (
+          <p
+            className={`text text_type_main-default ${
+              order.status === "done" ? styles.status : undefined
+            }`}
+          >
+            {orderStatus}
+          </p>
+        )}
         <div className={styles.block__ingredients}>
-            <OrderInformation data={getOrderList} /> 
+          <OrderInformation data={orderList} />
           <div className={styles.price}>
             <p className="text text_type_digits-default">{orderPrice}</p>
             <CurrencyIcon type="primary" />

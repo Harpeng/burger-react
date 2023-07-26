@@ -7,11 +7,12 @@ export default function OrderElement({
   showCounter,
   extraClass
 }) {
+
   return (
     <li className={`${styles.element} ${extraClass}`} styles={{ zIndex: 15 - index }}>
       <img
         className={styles.image}
-        src={ingredient.image_mobile}
+        src={ingredient.image}
         alt={ingredient.name}
       />
       {showCounter && (

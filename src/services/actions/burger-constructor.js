@@ -4,6 +4,7 @@ import {checkResponce} from '../../utils/api.js';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SORT_ITEM = 'SORT_ITEM';
+export const RESET_INGREDIENT = "RESET_INGREDIENT";
 
 
 

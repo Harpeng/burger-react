@@ -6,6 +6,7 @@
     flex-direction: column;
     gap: 24px;
     box-sizing: border-box;
+    color: white;
 }
 
 .link:visited {
@@ -76,4 +77,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     object-fit: contain;
+  }
+
+  .status {
+    color: #00cccc;
   }

@@ -284,8 +284,7 @@ const refreshToken = (refreshToken) => {
     fetch(tokenUrl, {
       method: "POST",
       headers: {
-        authorization: "",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify({ token: refreshToken }),
     })

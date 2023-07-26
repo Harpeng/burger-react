@@ -7,4 +7,9 @@
 .title {
     display: flex;
     justify-self: flex-start;
+    margin-top: 40px;
+}
+
+.list__container {
+    width: 600px;
 }

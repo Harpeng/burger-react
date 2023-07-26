@@ -123,11 +123,6 @@ function BurgerIngredients() {
           />
         </div>
       </div>
-      {/* {item &&  (
-        <Modal closePopup={closePopup} title="Детали ингредиента">
-          <IngredientDetails  item={item} />
-        </Modal>
-      )} */}
     </section>
   );
 }

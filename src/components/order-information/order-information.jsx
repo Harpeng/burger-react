@@ -5,6 +5,8 @@ import styles from "./order-information.module.css";
 import OrderElement from "../order-element/order-element";
 
 function OrderInformation({ data }) {
+
+    console.log(data)
   function showCounter() {
     if (data.length - 6 === 0) {
       return false;
@@ -15,7 +17,7 @@ function OrderInformation({ data }) {
 
   return (
     <ul className={styles.list}>
-      {data.map((item, index) => {
+      {data?.map((item, index) => {
         if (index < 5) {
           return (
             <OrderElement

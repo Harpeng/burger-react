@@ -1,5 +1,7 @@
 import {baseUrl} from '../../utils/utils.js';
 import {checkResponce} from '../../utils/api.js';
+import { getCookie } from '../../utils/cookie.js';
+import { refreshToken } from './auth.js';
 
 const GET_ORDER_DATA_REQUEST = "GET_ORDER_DATA_REQUEST";
 const GET_ORDER_DATA_SUCCESS = "GET_ORDER_DATA_SUCCESS";
@@ -7,6 +9,9 @@ const GET_ORDER_DATA_ERROR = "GET_ORDER_DATA_ERROR";
 const CLOSE_ORDER_MODAL = "CLOSE_ORDER_MODAL";
 const OPEN_ORDER_MODAL = "OPEN_ORDER_MODAL";
 const ORDER_ERROR = "ORDER_ERROR";
+const RESET_ORDER = "RESET_ORDER";
+
+
 
 const getOrderDataRequest = () => {
   return {
@@ -55,7 +60,7 @@ const openOrderDetails = (orderId) => {
       fetch(`${baseUrl}/orders`, {
         method: "POST",
         headers: {
-          authorization: "",
+          authorization: 'Bearer ' + getCookie("accessToken"),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ingredients: orderId}),
@@ -64,13 +69,32 @@ const openOrderDetails = (orderId) => {
         .then((data) => {
           dispatch(getOrderDataSuccess(data));
         })
+        .catch((err) => {
+          if (err.message === "jwt expired" || "jwt malformed") {
+            dispatch(refreshToken(getCookie("refreshToken")))
+            .then(() => {
+              fetch(`${baseUrl}/orders`, {
+                method: "POST",
+                headers: {
+                  authorization: 'Bearer ' + getCookie("accessToken"),
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ingredients: orderId}),
+              })
+              .then((data) => {
+                dispatch(getOrderDataSuccess(data));
+              })
+            })
+          }
+        })
         .catch((error) => {
-          console.log(`Ошибка при загрузке данных: ${error}`);
           dispatch(getOrderDataError(error));
-        });
+        })
     }
     };
   }
+
+
 
 export {
     GET_ORDER_DATA_REQUEST,
@@ -85,6 +109,7 @@ export {
     closeOrderModal,
     openOrderDetails,
     openOrderModal,
-    orderError
+    orderError,
+    RESET_ORDER
 }
 
