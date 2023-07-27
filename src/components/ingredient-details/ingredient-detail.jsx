@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./ingredient-details.module.css";
-import PropTypes from "prop-types";
-import { burgerPropTypes } from "../../utils/types.js";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,9 +21,7 @@ export function IngredientDetails() {
       setItem(ingredient);
     } else if (dataBurger.length) {
       setItem(dataBurger.find(item => item._id === id))
-    } else {
-      dispatch(fetchItems());
-    }
+    } 
   }, [dispatch, id, ingredient, dataBurger]);
   
 

@@ -27,7 +27,7 @@ function ListElement({ isOrder, order }) {
 
   const orderList = getOrderList();
 
-  console.log(orderList);
+//   console.log(orderList);
 
   const orderStatus = () => {
     if (order.status === "done") {

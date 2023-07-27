@@ -39,7 +39,6 @@ function BurgerIngredient({ id, src, name, price, type, onClick, count }) {
     }
   }, [burgerComponents.bun, burgerComponents.burgerConstructorItems, id, type]);
 
-  console.log(id)
 
   return (
     <NavLink

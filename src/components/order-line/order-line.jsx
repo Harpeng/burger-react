@@ -9,10 +9,10 @@ function OrderLine({ workList, doneList, total, totalToday }) {
         <div className={styles.list}>
           <h3 className="text text_type_main-medium">Готовы:</h3>
           <ul className={styles.list__digit}>
-            {doneList.map((item) => {
+            {doneList.map((item, index) => {
               return (
                 <li
-                  key={uuidv4()}
+                  key={index}
                   className={`text text_type_digits-default ${styles.done__order}`}
                 >{item}
                 </li>
@@ -23,10 +23,10 @@ function OrderLine({ workList, doneList, total, totalToday }) {
         <div className={styles.list}>
           <h3 className="text text_type_main-medium">В работе:</h3>
           <ul className={styles.list__digit}>
-          {workList.map((item) => {
+          {workList.map((item, index) => {
               return (
                 <li
-                key={uuidv4()}
+                key={index}
                 className={`${styles.work__order} text text_type_digits-default`}
               >
                 {item}

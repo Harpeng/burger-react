@@ -20,8 +20,10 @@ import Feed from "../../pages/feed/feed";
 import OrderInform from "../../pages/order-inform/order-inform";
 import OrderConsist from "../order-consist/order-consist";
 import ProfileOrder from "../../pages/profile-order/profile-order";
+import { fetchItems } from "../../services/actions/burger-ingredient";
 
 function App() {
+
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -33,6 +35,10 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchCheckAccess());
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    dispatch(fetchItems());
   }, [dispatch]);
 
   const navigate = useNavigate();
@@ -47,7 +53,7 @@ function App() {
       <AppHeader />
       <main className={styles.page__content}>
         <Routes location={background || location}>
-          <Route path="/" element={<Auth component={<Constructor />} />} />
+          <Route path="/" element={<Constructor />} />
           <Route path="/login" element={<UnAuth component={<Login />} />} />
           <Route
             path="/register"
@@ -67,7 +73,7 @@ function App() {
           <Route path="profile/orders/:id" element={<Auth component={<OrderInform />} />} />
           <Route path="/ingredients/:id" element={<Ingredient />} />
           <Route path="/feed/:id" element={<OrderInform />} />
-          <Route path="/feed" element={<Auth component={<Feed />} />} />
+          <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {background && (

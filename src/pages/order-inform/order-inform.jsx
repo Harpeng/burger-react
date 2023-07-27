@@ -5,14 +5,15 @@ import {
   wsConnectionStart,
   wsConnectionClose,
 } from "../../services/actions/socketAction";
-import { fetchItems } from "../../services/actions/burger-ingredient";
 import OrderConsist from "../../components/order-consist/order-consist";
 import { wsUrlAll, wsUrlProfile } from "../../utils/utils.js";
 import styles from "./order-inform.module.css";
+import { fetchItems } from "../../services/actions/burger-ingredient";
 
 export default function OrderInform() {
   const dispatch = useDispatch();
   const userAuth = useSelector((store) => store.authReducer.userAuth);
+  
 
   React.useEffect(() => {
     dispatch(fetchItems());
@@ -29,6 +30,7 @@ export default function OrderInform() {
   const currentOrder = orders.find((item) => item._id === id);
 
   console.log(currentOrder)
+
 
   return (
     currentOrder && (

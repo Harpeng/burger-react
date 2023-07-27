@@ -5,12 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 
 function ListFeed({ isFeedList, orders }) {
 
-    console.log(orders)
   return (
       <ul className={styles.list}>
         {orders.map((order) => {
           return (
-            <ListElement key={uuidv4()} order={order} isFeedList={isFeedList} />
+            <ListElement key={order._id} order={order} isFeedList={isFeedList} />
           );
         })}
       </ul>

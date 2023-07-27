@@ -5,9 +5,6 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientList from "./burger-ingredient-list/burger-ingredients-list.jsx";
 import { burgerPropTypes } from "../../utils/types.js";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchItems } from "../../services/actions/burger-ingredient";
-import { Modal } from "../modal/modal.jsx";
-import { IngredientDetails } from "../ingredient-details/ingredient-detail";
 import {
   openIngredientDetails,
   closeIngredientDetails,
@@ -50,9 +47,6 @@ function BurgerIngredients() {
     }
   }, [bunsInView, saucesInView, mainInView]);
 
-  React.useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
 
   const openItem = (item) => {
     dispatch(openIngredientDetails(item));

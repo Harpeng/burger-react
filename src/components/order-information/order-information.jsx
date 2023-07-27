@@ -6,7 +6,6 @@ import OrderElement from "../order-element/order-element";
 
 function OrderInformation({ data }) {
 
-    console.log(data)
   function showCounter() {
     if (data.length - 6 === 0) {
       return false;
@@ -23,7 +22,7 @@ function OrderInformation({ data }) {
             <OrderElement
               ingredient={item}
               index={index}
-              key={uuidv4()}
+              key={index}
               length={data.length}
               showCounter={false}
             />
@@ -33,7 +32,7 @@ function OrderInformation({ data }) {
             <OrderElement
               ingredient={item}
               index={index}
-              key={uuidv4()}
+              key={index}
               length={data.length}
               showCounter={showCounter()}
               extraClass={styles.opacity}
