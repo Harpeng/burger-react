@@ -8,6 +8,7 @@ import styles from "./order-consist.module.css";
 import OrderItem from "../order-item/order-item";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
+import useOrder from "../../hook/useOrder";
 // import React from "react";
 // import { fetchItems } from "../../services/actions/burger-ingredient";
 // import { wsUrlAll, wsUrlProfile} from "../../utils/utils.js";
@@ -23,44 +24,14 @@ export default function OrderConsist() {
     const orders = useSelector((store) => store.socketReducer.orders);
     const { id } = useParams();
     const currentOrder = orders.find((item) => item._id === id);
+
+    const { orderIngredientsList, orderPrice, orderStatus } =
+    useOrder(currentOrder);
     
-  const ingredients = useSelector(
-    (store) => store.burgerIngredientsReducer.dataBurger
-  );
-
-  const getOrderList = () => {
-    const list = [];
-    currentOrder.ingredients.forEach((id) => {
-      ingredients.forEach((ingredient) => {
-        if (ingredient._id === id) {
-          list.push(ingredient);
-        }
-      });
-    });
-    return list;
-  };
-
-  const orderList = getOrderList();
-
-  const orderStatus = () => {
-    if (currentOrder.status === "done") {
-      return "Выполнен";
-    } else {
-      return "Готовится";
-    }
-  };
-
-  const status = orderStatus();
-
-  console.log(orderStatus)
-
-  const orderPrice = orderList.reduce((price, item) => {
-    return price + item.price;
-  }, 0);
 
   function counter(ingredient) {
     let counter = 0;
-    orderList.forEach((item) => {
+    orderIngredientsList.forEach((item) => {
       if (item._id === ingredient._id) {
         counter += 1;
       }
@@ -68,7 +39,9 @@ export default function OrderConsist() {
     return counter;
   }
 
-  const IngredientList = Array.from(new Set(orderList));  
+  const IngredientList = Array.from(new Set(orderIngredientsList)); 
+  
+  console.log(currentOrder.ingredients)
 
 
 
@@ -85,7 +58,7 @@ export default function OrderConsist() {
         <p className="text text_type_main-medium mb-2">{`${currentOrder.name}`}</p>
         <p
           className={`text text_type_main-default ${styles.color}`}
-        >{status}</p>
+        >{orderStatus}</p>
       </div>
       <div className={styles.container__item}>
         <p className="text text_type_main-medium mb-6">Состав:</p>
@@ -93,7 +66,7 @@ export default function OrderConsist() {
           {IngredientList.map((item) => {
             return (
               <OrderItem
-                key={uuidv4()}
+                key={item._id}
                 counter={counter(item)}
                 ingredient={item}
               />

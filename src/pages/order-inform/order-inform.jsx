@@ -23,13 +23,13 @@ export default function OrderInform() {
     return () => {
       dispatch(wsConnectionClose());
     };
-  }, []);
+  }, [dispatch]);
 
   const orders = useSelector((store) => store.socketReducer.orders);
   const { id } = useParams();
   const currentOrder = orders.find((item) => item._id === id);
 
-  console.log(currentOrder)
+  console.log(orders)
 
 
   return (
