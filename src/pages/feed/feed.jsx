@@ -7,12 +7,14 @@ import {
   wsConnectionStart,
   wsConnectionClose,
 } from "../../services/actions/socketAction";
-import { wsUrlAll } from "../../utils/utils";
+import { wsUrlAll, wsUrlProfile } from "../../utils/utils";
 
 function Feed() {
   const { orders, total, totalToday } = useSelector(
     (store) => store.socketReducer
   );
+
+  const userAuth = useSelector((store) => store.authReducer.userAuth);
 
   const dispatch = useDispatch();
 
@@ -36,14 +38,17 @@ function Feed() {
     );
   }, [orders]);
 
-  console.log(orders);
+
 
   React.useEffect(() => {
-    dispatch(wsConnectionStart(wsUrlAll));
+    userAuth
+      ? dispatch(wsConnectionStart(wsUrlProfile))
+      : dispatch(wsConnectionStart(wsUrlAll));
     return () => {
       dispatch(wsConnectionClose());
     };
   }, []);
+
 
   return (
     <div className={styles.feed}>

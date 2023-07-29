@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import OrderInformation from "../order-information/order-information";
 
 function ListElement({ isOrder, order }) {
+    
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.dataBurger
   );
@@ -27,7 +28,6 @@ function ListElement({ isOrder, order }) {
 
   const orderList = getOrderList();
 
-//   console.log(orderList);
 
   const orderStatus = () => {
     if (order.status === "done") {
@@ -46,7 +46,7 @@ function ListElement({ isOrder, order }) {
   return (
     <li className={styles.container}>
       <Link
-        to={isOrder ? `/profile/orders/${order._id}` : `/feed/${order._id}`}
+        to={isOrder ? `/profile/orders/${order.number}` : `/feed/${order.number}`}
         state={
             isOrder
             ? { locationProfile: location }

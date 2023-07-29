@@ -39,6 +39,13 @@ const getOrderDataSuccess = (data) => {
   };
 };
 
+const getOrderSuccess = (data) => {
+  return {
+    type: GET_ORDER_DATA_SUCCESS,
+    payload: data.order,
+  };
+};
+
 const openOrderModal = () => {
     return {
         type: OPEN_ORDER_MODAL,
@@ -94,6 +101,21 @@ const openOrderDetails = (orderId) => {
     };
   }
 
+  const fetchOrder = (number) => {
+    return (dispatch) => {
+      dispatch(getOrderDataRequest);
+      fetch(`${baseUrl}/orders/${number}`)
+        .then(checkResponce)
+        .then((data) => {
+          dispatch(getOrderSuccess(data));
+        })
+        .catch((error) => {
+          console.log(`Ошибка при загрузке данных: ${error}`);
+          dispatch(orderError(error));
+        });
+    };
+  };
+
 
 
 export {
@@ -110,6 +132,7 @@ export {
     openOrderDetails,
     openOrderModal,
     orderError,
-    RESET_ORDER
+    RESET_ORDER,
+    fetchOrder
 }
 

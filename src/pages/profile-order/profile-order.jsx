@@ -15,10 +15,10 @@ export default function ProfileOrder() {
     (store) => store.socketProfileReducer
   );
 
-  const order = orders.reverse();
 
-  if (order.length > 50) {
-    order.length = 50;
+
+  if (orders.length > 50) {
+    orders.length = 50;
   }
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function ProfileOrder() {
   }, [errorState]);
 
   return (
-    order && (
+    orders && (
       <div className={styles.container}>
         <ListFeed orders={orders} isOrder={false} titleClassName={styles.title} />
       </div>
