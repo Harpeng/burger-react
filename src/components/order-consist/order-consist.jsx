@@ -8,13 +8,8 @@ import styles from "./order-consist.module.css";
 import OrderItem from "../order-item/order-item";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
-<<<<<<< HEAD
-import useOrder from "../../hook/useOrder";
-// import React from "react";
-=======
 import { fetchOrder } from "../../services/actions/order-details";
 import React from "react";
->>>>>>> 1393dbc (refactoring)
 // import { fetchItems } from "../../services/actions/burger-ingredient";
 // import { wsUrlAll, wsUrlProfile} from "../../utils/utils.js";
 // import {
@@ -26,15 +21,6 @@ import React from "react";
 export default function OrderConsist() {
 
     const location = useLocation();
-<<<<<<< HEAD
-    const orders = useSelector((store) => store.socketReducer.orders);
-    const { id } = useParams();
-    const currentOrder = orders.find((item) => item._id === id);
-
-    const { orderIngredientsList, orderPrice, orderStatus } =
-    useOrder(currentOrder);
-    
-=======
     // const orders = useSelector((store) => store.socketReducer.orders);
     const { number } = useParams();
 
@@ -107,11 +93,10 @@ const getOrderList = React.useMemo(() => {
   const orderPrice = orderList.reduce((price, item) => {
     return price + item.price;
   }, 0);
->>>>>>> 1393dbc (refactoring)
 
   function counter(ingredient) {
     let counter = 0;
-    orderIngredientsList.forEach((item) => {
+    getOrderList.forEach((item) => {
       if (item._id === ingredient._id) {
         counter += 1;
       }
@@ -119,9 +104,8 @@ const getOrderList = React.useMemo(() => {
     return counter;
   }
 
-  const IngredientList = Array.from(new Set(orderIngredientsList)); 
+  const IngredientList = Array.from(new Set(getOrderList)); 
   
-  console.log(currentOrder.ingredients)
 
 
 
