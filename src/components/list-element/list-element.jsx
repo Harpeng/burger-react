@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./list-element.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import {
   CurrencyIcon,
   FormattedDate,

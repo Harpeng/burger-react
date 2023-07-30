@@ -8,7 +8,7 @@ import styles from "./order-consist.module.css";
 import OrderItem from "../order-item/order-item";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
-import { fetchOrder } from "../../services/actions/order-details";
+import { fetchOrder } from "../../services/actions/order";
 import React from "react";
 // import { fetchItems } from "../../services/actions/burger-ingredient";
 // import { wsUrlAll, wsUrlProfile} from "../../utils/utils.js";
@@ -20,28 +20,36 @@ import React from "react";
 
 export default function OrderConsist() {
 
-    const location = useLocation();
+    // const location = useLocation();
     // const orders = useSelector((store) => store.socketReducer.orders);
     const { number } = useParams();
+    const { id } = useParams();
+    // const orderData = orders.find((item) => item.number === number);
+    // const orderIngredient = orderData.ingredient;
+
 
     const dispatch = useDispatch();
 
     const order = useSelector((store) => {
-      let order = store.socketReducer.orders.find((item) => item.number === number);
-      if(order) {
-        return order;
+      let orders = store.socketReducer.orders.find((item) => item.number === number);
+      if(orders) {
+        return orders;
       };
 
-      order = store.socketProfileReducer.orders.find((item) => item.number === number);
-      if(order) {
-        return order;
+      orders = store.socketProfileReducer.orders.find((item) => item.number === number);
+      if(orders) {
+        return orders;
       };
 
-     order = store.orderDetailsReducer.servOrder;
-     if(order) {
-        return order;
+     orders = store.orderReducer.order;
+     if(orders) {
+        return orders;
      };
+
+     return null
 });
+
+console.log(order)
 
 React.useEffect(() => {
     if(!order) {
@@ -49,7 +57,7 @@ React.useEffect(() => {
     }
 })
 
-console.log(order)
+
     // const currentOrder = orders.find((item) => item._id === id);
     
   const ingredients = useSelector(
@@ -68,15 +76,20 @@ console.log(order)
 //     return list;
 //   };
 
-const getOrderList = React.useMemo(() => {
-    if (order.ingredients) {
-      return order.ingredients.map((id) =>
-      ingredients.find((item) => item._id === id)
-      );
-    }
-  }, [ingredients, order.ingredients]);
+const getOrderList = () => {
+  const list = [];
+  order.ingredient?.forEach((ingredientId) => {
+    ingredients.forEach((ingredient) => {
+      if (ingredient._id === ingredientId) {
+        list.push(ingredient);
+      }
+    });
+  });
 
-  const orderList = getOrderList;
+  return list;
+};
+
+  const orderList = getOrderList();
 
   const orderStatus = () => {
     if (order.status === "done") {
@@ -96,7 +109,7 @@ const getOrderList = React.useMemo(() => {
 
   function counter(ingredient) {
     let counter = 0;
-    getOrderList.forEach((item) => {
+    order.forEach((item) => {
       if (item._id === ingredient._id) {
         counter += 1;
       }
@@ -104,8 +117,7 @@ const getOrderList = React.useMemo(() => {
     return counter;
   }
 
-  const IngredientList = Array.from(new Set(getOrderList)); 
-  
+  const IngredientList = Array.from(new Set(orderList)); 
 
 
 

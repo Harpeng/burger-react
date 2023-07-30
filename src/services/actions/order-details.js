@@ -1,4 +1,4 @@
-import {baseUrl} from '../../utils/utils.js';
+import {baseUrl, wsUrl} from '../../utils/utils.js';
 import {checkResponce} from '../../utils/api.js';
 import { getCookie } from '../../utils/cookie.js';
 import { refreshToken } from './auth.js';
@@ -104,7 +104,7 @@ const openOrderDetails = (orderId) => {
   const fetchOrder = (number) => {
     return (dispatch) => {
       dispatch(getOrderDataRequest);
-      fetch(`${baseUrl}/orders/${number}`)
+      fetch(`${wsUrl}/orders/${number}`)
         .then(checkResponce)
         .then((data) => {
           dispatch(getOrderSuccess(data));

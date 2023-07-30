@@ -15,5 +15,5 @@ const resetPasswordUrl = `${baseUrl}/password-reset/reset`;
 const wsUrlAll = `${wsUrl}/all`;
 const wsUrlProfile = `${wsUrl}?token=${getCookie("accessToken")}`;
 
-export {wsUrlProfile, wsUrlAll, baseUrl,resetPasswordUrl, forgotPasswordUrl, checkAccessUrl, tokenUrl, logoutUrl, loginUrl, registerUrl, orderUrl, ingredientsUrl };
+export {wsUrl, wsUrlProfile, wsUrlAll, baseUrl,resetPasswordUrl, forgotPasswordUrl, checkAccessUrl, tokenUrl, logoutUrl, loginUrl, registerUrl, orderUrl, ingredientsUrl };
 
