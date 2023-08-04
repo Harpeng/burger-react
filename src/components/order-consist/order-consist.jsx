@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   CurrencyIcon,
   FormattedDate,
@@ -9,7 +9,7 @@ import OrderItem from "../order-item/order-item";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import { fetchOrder } from "../../services/actions/order";
-import React from "react";
+import React, {useCallback, useMemo} from "react";
 // import { fetchItems } from "../../services/actions/burger-ingredient";
 // import { wsUrlAll, wsUrlProfile} from "../../utils/utils.js";
 // import {
@@ -17,79 +17,112 @@ import React from "react";
 //     wsConnectionClose,
 //   } from "../../services/actions/socketAction";
 
-
 export default function OrderConsist() {
+  // const location = useLocation();
+  // const orders = useSelector((store) => store.socketReducer.orders);
+  const { number } = useParams();
+  const { id } = useParams();
+  // const orderData = orders.find((item) => item.number === number);
+  // const orderIngredient = orderData.ingredient;
 
-    // const location = useLocation();
-    // const orders = useSelector((store) => store.socketReducer.orders);
-    const { number } = useParams();
-    const { id } = useParams();
-    // const orderData = orders.find((item) => item.number === number);
-    // const orderIngredient = orderData.ingredient;
+  const dispatch = useDispatch();
 
-
-    const dispatch = useDispatch();
-
-    const order = useSelector((store) => {
-      let orders = store.socketReducer.orders.find((item) => item.number === number);
-      if(orders) {
-        return orders;
-      };
-
-      orders = store.socketProfileReducer.orders.find((item) => item.number === number);
-      if(orders) {
-        return orders;
-      };
-
-     orders = store.orderReducer.order;
-     if(orders) {
-        return orders;
-     };
-
-     return null
-});
-
-console.log(order)
-
-React.useEffect(() => {
-    if(!order) {
-        dispatch(fetchOrder(number));
-    }
-})
-
-
-    // const currentOrder = orders.find((item) => item._id === id);
-    
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.dataBurger
   );
 
-//   const getOrderList = () => {
-//     const list = [];
-//     order.ingredients?.forEach((id) => {
-//       ingredients.forEach((ingredient) => {
-//         if (ingredient._id === id) {
-//           list.push(ingredient);
-//         }
-//       });
-//     });
-//     return list;
-//   };
+  const order = useSelector((store) => {
+    let order = store.socketReducer.orders.find(
+      (item) => item.number === number
+    );
+    if (order) {
+      return order;
+    }
 
-const getOrderList = () => {
-  const list = [];
-  order.ingredient?.forEach((ingredientId) => {
-    ingredients.forEach((ingredient) => {
-      if (ingredient._id === ingredientId) {
-        list.push(ingredient);
-      }
-    });
+    order = store.socketProfileReducer.orders.find(
+      (item) => item.number === number
+    );
+    if (order) {
+      return order;
+    }
+
+    order = store.orderReducer.order;
+    if (order) {
+      return order;
+    }
+
+    return null;
   });
 
-  return list;
-};
+  console.log(order);
+
+
+  React.useEffect(() => {
+    if (order === null || order) {
+      dispatch(fetchOrder(number));
+    } 
+  }, []);
+
+  // const getOrderList = React.useMemo(() => {
+  //   if (order.ingredients) {
+  //     return order.ingredients.map((id) =>
+  //       ingredients.find((item) => item._id === id)
+  //     );
+  //   }
+  // }, []);
+
+  // const groupedIngredients = useMemo(() => {
+  //   if (getOrderList) {
+  //     return Object.values(
+  //       getOrderList.reduce((acc, item) => {
+  //         const id = item._id;
+  //         if (!acc[id]) {
+  //           acc[id] = { ...item, count: 1 };
+  //         } else {
+  //           acc[id].count++;
+  //         }
+  //         return acc;
+  //       }, {})
+  //     );
+  //   }
+  // }, [getOrderList]);
+
+  if (!order) {
+    return null;
+  }
+
+  // const currentOrder = orders.find((item) => item._id === id);
+
+  //   const getOrderList = () => {
+  //     const list = [];
+  //     order.ingredients?.forEach((id) => {
+  //       ingredients.forEach((ingredient) => {
+  //         if (ingredient._id === id) {
+  //           list.push(ingredient);
+  //         }
+  //       });
+  //     });
+  //     return list;
+  //   };
+
+  const getOrderList = () => {
+    const list = [];
+    order.ingredients?.forEach((ingredientId) => {
+      ingredients.forEach((ingredient) => {
+        if (ingredient._id === ingredientId) {
+          list.push(ingredient);
+        }
+      });
+    });
+
+    return list;
+  };
+
+
+  
 
   const orderList = getOrderList();
+
 
   const orderStatus = () => {
     if (order.status === "done") {
@@ -101,7 +134,6 @@ const getOrderList = () => {
 
   const status = orderStatus();
 
-  console.log(orderStatus)
 
   const orderPrice = orderList.reduce((price, item) => {
     return price + item.price;
@@ -109,7 +141,7 @@ const getOrderList = () => {
 
   function counter(ingredient) {
     let counter = 0;
-    order.forEach((item) => {
+    order.ingredients.forEach((item) => {
       if (item._id === ingredient._id) {
         counter += 1;
       }
@@ -117,9 +149,9 @@ const getOrderList = () => {
     return counter;
   }
 
-  const IngredientList = Array.from(new Set(orderList)); 
+  const ingredientList = Array.from(new Set(orderList));
 
-
+  console.log(ingredientList)
 
   return (
     <div
@@ -132,14 +164,14 @@ const getOrderList = () => {
           className={`text text_type_digits-default mb-10 ${styles.title}`}
         >{`#${order.number}`}</p>
         <p className="text text_type_main-medium mb-2">{`${order.name}`}</p>
-        <p
-          className={`text text_type_main-default ${styles.color}`}
-        >{orderStatus}</p>
+        <p className={`text text_type_main-default ${styles.color}`}>
+          {status}
+        </p>
       </div>
       <div className={styles.container__item}>
         <p className="text text_type_main-medium mb-6">Состав:</p>
         <ul className={styles.list}>
-          {IngredientList.map((item) => {
+          {ingredientList?.map((item) => {
             return (
               <OrderItem
                 key={item._id}

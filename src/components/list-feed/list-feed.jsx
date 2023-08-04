@@ -9,7 +9,7 @@ function ListFeed({ isFeedList, orders, isOrder}) {
       <ul className={styles.list}>
         {orders.reverse().map((order) => {
           return (
-            <ListElement key={uuidv4()} order={order} isFeedList={isOrder} />
+            <ListElement key={order._id} order={order} isFeedList={isOrder} />
           );
         })}
       </ul>
