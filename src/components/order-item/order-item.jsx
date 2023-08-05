@@ -2,6 +2,8 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import styles from "./order-item.module.css";
 
 export default function OrderItem({ ingredient, counter }) { 
+
+  console.log(counter)
     return (
       <li className={styles.container}>
         <div className={styles.container__item}>

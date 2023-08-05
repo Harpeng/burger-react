@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "./app.module.css";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header.jsx";
@@ -17,12 +17,12 @@ import { Auth, UnAuth } from "../ProtectedRoute/protectedRoute.jsx";
 import { IngredientDetails } from "../ingredient-details/ingredient-detail";
 import { closeIngredientDetails } from "../../services/actions/ingredient-details.js";
 import Feed from "../../pages/feed/feed";
+import OrderInform from "../../pages/order-inform/order-inform";
 import OrderConsist from "../order-consist/order-consist";
 import ProfileOrder from "../../pages/profile-order/profile-order";
 import { fetchItems } from "../../services/actions/burger-ingredient";
 
 function App() {
-
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -66,10 +66,18 @@ function App() {
             path="/reset-password"
             element={<UnAuth component={<ResetPassword />} />}
           />
-          <Route path="/profile" element={<Auth component={<Profile />} />} >
-            <Route path="orders" element={<Auth component={<ProfileOrder />} />} />
+          <Route path="/profile" element={<Auth component={<Profile />} />}>
+            <Route
+              path="orders"
+              element={<Auth component={<ProfileOrder />} />}
+            />
           </Route>
+          <Route
+            path="profile/orders/:number"
+            element={<Auth component={<OrderInform />} />}
+          />
           <Route path="/ingredients/:id" element={<Ingredient />} />
+          <Route path="/feed/:number" element={<OrderInform />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -86,7 +94,7 @@ function App() {
             <Route
               path="/feed/:number"
               element={
-                <Modal closePopup={closePopup} route >
+                <Modal closePopup={closePopup} route>
                   <OrderConsist />
                 </Modal>
               }
@@ -94,9 +102,13 @@ function App() {
             <Route
               path="/profile/orders/:number"
               element={
-                <Modal closePopup={closePopup} route >
-                  <OrderConsist />
-                </Modal>
+                <Auth
+                  component={
+                    <Modal closePopup={closePopup} route>
+                      <OrderConsist />
+                    </Modal>
+                  }
+                />
               }
             />
           </Routes>

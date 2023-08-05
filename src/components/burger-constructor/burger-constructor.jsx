@@ -22,6 +22,7 @@ import { useDrop } from "react-dnd";
 import BurgerFillingItem from "./burger-fillings.jsx/burger-fillings";
 import { Reorder } from "framer-motion";
 import { RESET_INGREDIENT } from "../../services/actions/burger-constructor.js";
+import { useNavigate } from "react-router-dom";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -34,9 +35,15 @@ function BurgerConstructor() {
     items: store.burgerIngredientsReducer.dataBurger,
   }));
 
+  const navigate = useNavigate();
+
+  
+
   const state = useSelector((store) => store);
 
   const getNubmerId = state.orderDetailsReducer.servOrder;
+
+  const userAuth = state.authReducer.userAuth;
 
   const orderOverlay = state.orderDetailsReducer.openModal;
 
@@ -47,7 +54,9 @@ function BurgerConstructor() {
 
   const getOrder = () => {
     const arrayId = [bun.id, ...fillingItems.map((item) => item.id), bun.id];
-    dispatch(openOrderDetails(arrayId));
+    userAuth ?
+    dispatch(openOrderDetails(arrayId)) :
+    navigate("/login");
   };
 
   const handleDrop = (item) => {

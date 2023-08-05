@@ -18,12 +18,10 @@ import React, {useCallback, useMemo} from "react";
 //   } from "../../services/actions/socketAction";
 
 export default function OrderConsist() {
-  // const location = useLocation();
-  // const orders = useSelector((store) => store.socketReducer.orders);
+
   const { number } = useParams();
   const { id } = useParams();
-  // const orderData = orders.find((item) => item.number === number);
-  // const orderIngredient = orderData.ingredient;
+
 
   const dispatch = useDispatch();
 
@@ -63,47 +61,11 @@ export default function OrderConsist() {
     } 
   }, []);
 
-  // const getOrderList = React.useMemo(() => {
-  //   if (order.ingredients) {
-  //     return order.ingredients.map((id) =>
-  //       ingredients.find((item) => item._id === id)
-  //     );
-  //   }
-  // }, []);
 
-  // const groupedIngredients = useMemo(() => {
-  //   if (getOrderList) {
-  //     return Object.values(
-  //       getOrderList.reduce((acc, item) => {
-  //         const id = item._id;
-  //         if (!acc[id]) {
-  //           acc[id] = { ...item, count: 1 };
-  //         } else {
-  //           acc[id].count++;
-  //         }
-  //         return acc;
-  //       }, {})
-  //     );
-  //   }
-  // }, [getOrderList]);
 
   if (!order) {
     return null;
   }
-
-  // const currentOrder = orders.find((item) => item._id === id);
-
-  //   const getOrderList = () => {
-  //     const list = [];
-  //     order.ingredients?.forEach((id) => {
-  //       ingredients.forEach((ingredient) => {
-  //         if (ingredient._id === id) {
-  //           list.push(ingredient);
-  //         }
-  //       });
-  //     });
-  //     return list;
-  //   };
 
   const getOrderList = () => {
     const list = [];
@@ -139,17 +101,18 @@ export default function OrderConsist() {
     return price + item.price;
   }, 0);
 
+
+  const ingredientList = Array.from(new Set(orderList));
+
   function counter(ingredient) {
     let counter = 0;
-    order.ingredients.forEach((item) => {
+    orderList.forEach((item) => {
       if (item._id === ingredient._id) {
-        counter += 1;
+        counter ++;
       }
     });
     return counter;
   }
-
-  const ingredientList = Array.from(new Set(orderList));
 
   console.log(ingredientList)
 

@@ -11,8 +11,12 @@ import ListFeed from "../../components/list-feed/list-feed.jsx";
 
 export default function ProfileOrder() {
   const dispatch = useDispatch();
-  const { orders, errorState } = useSelector(
-    (store) => store.socketProfileReducer
+  const errorState = useSelector(
+    (store) => store.socketProfileReducer.errorState
+  );
+
+  const orders = useSelector(
+    (store) => store.socketProfileReducer.orders
   );
 
 

@@ -51,12 +51,8 @@ function ListElement({ isOrder, order }) {
   return (
     <li className={styles.container}>
       <Link
-        to={isOrder ? `/profile/orders/${order.number}` : `/feed/${order.number}`}
-        state={
-            isOrder
-            ? { locationProfile: location }
-            : { locationFeed: location }
-        }
+        to={`${order.number}`}
+        state={{ background: location }}
         className={styles.link}
       >
         <div className={styles.order__data}>

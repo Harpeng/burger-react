@@ -3,13 +3,13 @@ import styles from "./list-feed.module.css";
 import ListElement from "../list-element/list-element";
 import { v4 as uuidv4 } from "uuid";
 
-function ListFeed({ isFeedList, orders, isOrder}) {
+function ListFeed({orders, isOrder}) {
 
   return (
       <ul className={styles.list}>
         {orders.reverse().map((order) => {
           return (
-            <ListElement key={order._id} order={order} isFeedList={isOrder} />
+            <ListElement key={order._id} order={order} isOrder={isOrder} />
           );
         })}
       </ul>

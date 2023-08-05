@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../utils/cookie";
@@ -51,104 +51,109 @@ function Profile() {
     setIsChange(false);
   }
 
-  const myOrder = useSelector(
-    (store) => store.orderDetailsReducer.servOrder
-  );
+  const myOrder = useSelector((store) => store.orderDetailsReducer.servOrder);
+
+  const navigate = useNavigate();
 
   function closeModal(e) {
     e.stopPropagation();
+    navigate(-1);
   }
 
+  const background = (location.state || location.state?.locationProfile);
+
   return (
-    <div className={styles.profileContainer}>
-      <div className={styles.navContainer}>
-        <nav className={styles.navLink}>
-          <NavLink
-            to="/profile"
-            end
-            className={({ isActive }) =>
-              link + (isActive ? activelink : inactiveLink)
-            }
-          >
-            Профиль
-          </NavLink>
-          <NavLink
-            to="/profile/orders"
-            className={({ isActive }) =>
-              link + (isActive ? activelink : inactiveLink)
-            }
-            state={{ order: true }}
-            end
-          >
-            История заказов
-          </NavLink>
-          <NavLink
-            onClick={logout}
-            className={`${styles.link} text text_type_main-medium text_color_inactive`}
-          >
-            Выход
-          </NavLink>
-        </nav>
-        <p className={`${styles.text} text text_type_main-default`}>
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
+    <>
+      <div className={styles.profileContainer}>
+        <div className={styles.navContainer}>
+          <nav className={styles.navLink}>
+            <NavLink
+              to="/profile"
+              end
+              className={({ isActive }) =>
+                link + (isActive ? activelink : inactiveLink)
+              }
+            >
+              Профиль
+            </NavLink>
+            <NavLink
+              to="/profile/orders"
+              className={({ isActive }) =>
+                link + (isActive ? activelink : inactiveLink)
+              }
+              state={{ order: true }}
+              end
+            >
+              История заказов
+            </NavLink>
+            <NavLink
+              onClick={logout}
+              className={`${styles.link} text text_type_main-medium text_color_inactive`}
+            >
+              Выход
+            </NavLink>
+          </nav>
+          <p className={`${styles.text} text text_type_main-default`}>
+            В этом разделе вы можете изменить свои персональные данные
+          </p>
+        </div>
+        {background ? (
+          <Outlet />
+        ) : (
+          <form onSubmit={profileFormSubmit} className={styles.formContainer}>
+            <Input
+              onChange={onChange}
+              value={value?.name || ""}
+              placeholder={"Имя"}
+              name={"name"}
+              icon={"EditIcon"}
+              extraClass="mb-6"
+              onIconClick={() => setInput({ ...input, name: !input.name })}
+              disabled={input.name ? false : true}
+            />
+            <EmailInput
+              onChange={onChange}
+              value={value?.email || ""}
+              name={"email"}
+              placeholder={"Логин"}
+              icon={"EditIcon"}
+              extraClass="mb-6"
+              onIconClick={() => setInput({ ...input, email: !input.email })}
+              disabled={input.email ? false : true}
+            />
+            <PasswordInput
+              onChange={onChange}
+              value={value?.password || "*******"}
+              name={"password"}
+              placeholder={"Пароль"}
+              icon={"EditIcon"}
+              extraClass="mb-6"
+              disabled
+            />
+            {isChange && (
+              <div className={`mt-6 mr-4 ${styles.buttonBlock}`}>
+                <Button
+                  size="medium"
+                  htmlType="button"
+                  type="secondary"
+                  onClick={onReset}
+                >
+                  Отмена
+                </Button>
+                <Button htmlType="submit" size="medium">
+                  Сохранить
+                </Button>
+              </div>
+            )}
+          </form>
+        )}
+        {myOrder && (
+          <Modal onCloseModal={closeModal}>
+            <OrderConsist order={myOrder} />
+          </Modal>
+        )}
       </div>
-      {location.state ? (
-        <Outlet />
-      ) : (
-        <form onSubmit={profileFormSubmit} className={styles.formContainer}>
-          <Input
-            onChange={onChange}
-            value={value?.name || ""}
-            placeholder={"Имя"}
-            name={"name"}
-            icon={"EditIcon"}
-            extraClass="mb-6"
-            onIconClick={() => setInput({ ...input, name: !input.name })}
-            disabled={input.name ? false : true}
-          />
-          <EmailInput
-            onChange={onChange}
-            value={value?.email || ""}
-            name={"email"}
-            placeholder={"Логин"}
-            icon={"EditIcon"}
-            extraClass="mb-6"
-            onIconClick={() => setInput({ ...input, email: !input.email })}
-            disabled={input.email ? false : true}
-          />
-          <PasswordInput
-            onChange={onChange}
-            value={value?.password || "*******"}
-            name={"password"}
-            placeholder={"Пароль"}
-            icon={"EditIcon"}
-            extraClass="mb-6"
-            disabled
-          />
-          {isChange && (
-            <div className={`mt-6 mr-4 ${styles.buttonBlock}`}>
-              <Button
-                size="medium"
-                htmlType="button"
-                type="secondary"
-                onClick={onReset}
-              >
-                Отмена
-              </Button>
-              <Button htmlType="submit" size="medium">
-                Сохранить
-              </Button>
-            </div>
-          )}
-        </form>
-      )}
-      {myOrder && (
-        <Modal onCloseModal={closeModal}>
-          <OrderConsist order={myOrder} />
-        </Modal>
-      )}
-    </div>
+    </>
   );
 }
 
