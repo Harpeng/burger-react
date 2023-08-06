@@ -27,6 +27,7 @@ function Profile() {
 
   const logout = () => {
     dispatch(fetchLogout(refreshToken));
+
   };
 
   const link = `${styles.link} text text_type_main-medium `;
@@ -60,7 +61,9 @@ function Profile() {
     navigate(-1);
   }
 
-  const background = (location.state || location.state?.locationProfile);
+  const background = location.state;
+
+
 
   return (
     <>
@@ -69,16 +72,16 @@ function Profile() {
           <nav className={styles.navLink}>
             <NavLink
               to="/profile"
-              end
               className={({ isActive }) =>
                 link + (isActive ? activelink : inactiveLink)
               }
+              end
             >
               Профиль
             </NavLink>
             <NavLink
               to="/profile/orders"
-              className={({ isActive }) =>
+              className={({ isActive }) => 
                 link + (isActive ? activelink : inactiveLink)
               }
               state={{ order: true }}

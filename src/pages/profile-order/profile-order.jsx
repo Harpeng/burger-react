@@ -11,9 +11,9 @@ import ListFeed from "../../components/list-feed/list-feed.jsx";
 
 export default function ProfileOrder() {
   const dispatch = useDispatch();
-  const errorState = useSelector(
-    (store) => store.socketProfileReducer.errorState
-  );
+  // const errorState = useSelector(
+  //   (store) => store.socketProfileReducer.errorState
+  // );
 
   const orders = useSelector(
     (store) => store.socketProfileReducer.orders
@@ -32,14 +32,14 @@ export default function ProfileOrder() {
     };
   }, []);
 
-  useEffect(() => {
-    if (errorState) {
-      dispatch(wsConnectionCloseProfile());
-      dispatch(fetchCheckAccess())
-        .then(() => dispatch(wsConnectionStartProfile(wsUrlProfile)))
-        .catch(() => dispatch(wsConnectionCloseProfile()));
-    }
-  }, [errorState]);
+  // useEffect(() => {
+  //   if (errorState) {
+  //     dispatch(wsConnectionCloseProfile());
+  //     dispatch(fetchCheckAccess())
+  //       .then(() => dispatch(wsConnectionStartProfile(wsUrlProfile)))
+  //       .catch(() => dispatch(wsConnectionCloseProfile()));
+  //   }
+  // }, [errorState]);
 
   return (
     orders && (
