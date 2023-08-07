@@ -21,7 +21,7 @@ console.log(userAuth)
 if (unAuth && user) {
   // Пользователь авторизован, но роут предназначен для неавторизованного пользователя
   // Делаем редирект на главную страницу или на тот адрес, что записан в location.state.from
-  const { from } = { from: { pathname: "/profile" } } || location.state;
+  const { from } = location.state || { from: { pathname: "/" } };
   return <Navigate to={from} />;
 }
 
