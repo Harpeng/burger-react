@@ -8,6 +8,7 @@ import styles from "./profile-order.module.css";
 import { wsUrlProfile } from "../../utils/utils.js";
 import { fetchCheckAccess } from "../../services/actions/auth.js";
 import ListFeed from "../../components/list-feed/list-feed.jsx";
+import { getCookie } from "../../utils/cookie.js";
 
 export default function ProfileOrder() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function ProfileOrder() {
   }
 
   useEffect(() => {
-    dispatch(wsConnectionStartProfile(wsUrlProfile));
+    dispatch(wsConnectionStartProfile(`${wsUrlProfile}?token=${getCookie("accessToken")}`));
     return () => {
       dispatch(wsConnectionCloseProfile());
     };

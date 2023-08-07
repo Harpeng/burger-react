@@ -8,7 +8,7 @@ import {socketMiddleware} from "./middleware/socketMiddleWare.js";
 const wsActions = {
   wsInit: WS_CONNECTION_START,
   onOpen: WS_CONNECTION_SUCCESS,
-  onClose: WS_CONNECTION_CLOSE,
+  onClosed: WS_CONNECTION_CLOSE,
   onError: WS_CONNECTION_ERROR,
   onMessage: WS_GET_MESSAGE,
   wsDisconnect: WS_CONNECTION_CLOSED
@@ -17,7 +17,7 @@ const wsActions = {
 const wsActionsProfile = {
   wsInit: WS_CONNECTION_START_PROFILE,
   onOpen: WS_CONNECTION_SUCCESS_PROFILE,
-  onClose: WS_CONNECTION_CLOSE_PROFILE,
+  onClosed: WS_CONNECTION_CLOSE_PROFILE,
   onError: WS_CONNECTION_ERROR_PROFILE,
   onMessage: WS_GET_MESSAGE_PROFILE,
   wsDisconnect:WS_CONNECTION_CLOSED_PROFILE,

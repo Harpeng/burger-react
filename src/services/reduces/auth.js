@@ -28,11 +28,6 @@ import {
 } from "../actions/auth.js";
 
 export const initialState = {
-  //авторизация
-//   user: {
-//     email: "",
-//     name: "",
-//   },
 
   user: null,
 

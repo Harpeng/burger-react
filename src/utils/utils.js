@@ -13,7 +13,7 @@ const forgotPasswordUrl = `${baseUrl}/password-reset`;
 const resetPasswordUrl = `${baseUrl}/password-reset/reset`;
 
 const wsUrlAll = `${wsUrl}/all`;
-const wsUrlProfile = `${wsUrl}?token=${getCookie("accessToken")}`;
+const wsUrlProfile = `${wsUrl}`;
 
 export {wsUrl, wsUrlProfile, wsUrlAll, baseUrl,resetPasswordUrl, forgotPasswordUrl, checkAccessUrl, tokenUrl, logoutUrl, loginUrl, registerUrl, orderUrl, ingredientsUrl };
 
