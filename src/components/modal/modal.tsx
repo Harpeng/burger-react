@@ -12,12 +12,12 @@ interface IModal{
   route?: boolean;
 }
 
-export const Modal:FC<IModal> = ({ children, title, closePopup, route }) => {
+export const Modal:FC<IModal> = ({ children, title, closePopup }) => {
   const modalRoot = document.getElementById("react-modals") as HTMLElement;
 
 
   React.useEffect(() => {
-    const closeHandler = (evt:any) => {
+    const closeHandler = (evt:KeyboardEvent) => {
       if (evt.key === "Escape") {
         closePopup();
       }

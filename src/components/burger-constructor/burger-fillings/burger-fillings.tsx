@@ -16,7 +16,7 @@ interface IBurgerFillingItem {
 const BurgerFillingItem:FC <IBurgerFillingItem> = ({ burgerConstructorItems }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (uniqueId:any) => {
+  const handleDelete = (uniqueId:IburgerInfo) => {
     dispatch(deleteIngredient(uniqueId));
   };
 

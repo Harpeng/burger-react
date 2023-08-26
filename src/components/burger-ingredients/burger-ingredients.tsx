@@ -10,6 +10,7 @@ import {
 } from "../../services/actions/ingredient-details";
 import { useInView } from "react-intersection-observer";
 import { useNavigate} from "react-router-dom";
+import { IburgerInfo } from "../../services/type/data";
 
 
 
@@ -20,9 +21,9 @@ const BurgerIngredients: FC =  () =>  {
 
   const dispatch = useDispatch();
 
-  const bun =  dataBurger.filter((element: any) => element.type === "bun");
-  const main = dataBurger.filter((element: any) => element.type === "main");
-  const sauce = dataBurger.filter((element: any) => element.type === "sauce");
+  const bun =  dataBurger.filter((element: IburgerInfo) => element.type === "bun");
+  const main = dataBurger.filter((element: IburgerInfo) => element.type === "main");
+  const sauce = dataBurger.filter((element: IburgerInfo) => element.type === "sauce");
 
   const [bunRef, bunsInView] = useInView({
     threshold: 0,
@@ -46,7 +47,7 @@ const BurgerIngredients: FC =  () =>  {
   }, [bunsInView, saucesInView, mainInView]);
 
 
-  const openItem = (item: any) => {
+  const openItem = (item: IburgerInfo) => {
     dispatch(openIngredientDetails(item));
   };
 
@@ -56,7 +57,7 @@ const BurgerIngredients: FC =  () =>  {
   // };
 
   const [current, setCurrent] = React.useState("bun");
-  const handleClick = (tab: any) => {
+  const handleClick = (tab: string) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
     if (element) {
@@ -116,11 +117,5 @@ const BurgerIngredients: FC =  () =>  {
   );
 }
 
-BurgerIngredients.propTypes = {
-  sauce: PropTypes.arrayOf(burgerPropTypes),
-  main: PropTypes.arrayOf(burgerPropTypes),
-  bun: PropTypes.arrayOf(burgerPropTypes),
-  openItem: PropTypes.func,
-};
 
 export default BurgerIngredients;

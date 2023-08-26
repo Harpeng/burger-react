@@ -16,7 +16,7 @@ import {
   addItem,
 } from "../../services/actions/burger-constructor";
 import { useDrop } from "react-dnd";
-import BurgerFillingItem from "./burger-fillings.jsx/burger-fillings";
+import BurgerFillingItem from "./burger-fillings/burger-fillings";
 import { Reorder } from "framer-motion";
 import { RESET_INGREDIENT, SORT_ITEM } from "../../services/constants/index";
 import { useNavigate } from "react-router-dom";

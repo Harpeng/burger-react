@@ -4,7 +4,7 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/hook";
 import { useDrag } from "react-dnd";
 import { NavLink, useLocation } from "react-router-dom";
 import { IburgerInfo } from "../../../services/type/data";
@@ -29,7 +29,7 @@ const BurgerIngredient:FC <IBurgerIngredient> = ({ id, src, name, price, type, o
   });
 
   const burgerComponents = useSelector(
-    (state: any) => state.burgerConstructorReducer
+    (state) => state.burgerConstructorReducer
   );
 
 
@@ -39,7 +39,7 @@ const BurgerIngredient:FC <IBurgerIngredient> = ({ id, src, name, price, type, o
     if (type === "bun") {
       return id === burgerComponents.bun?.id ? 2 : 0;
     } else {
-      return burgerComponents.burgerConstructorItems.reduce((acc: any, item: any) => {
+      return burgerComponents.burgerConstructorItems.reduce((acc: number, item: IburgerInfo) => {
         if (item?.id === id) {
           return acc + 1;
         } else {
