@@ -13,7 +13,7 @@
   max-height: 718px;
   border-radius: 40px;
   background-color: #1c1c21;
-  z-index: 5;
+  z-index: 99;
 }
 
 .closeIcon {
