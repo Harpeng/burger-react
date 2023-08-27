@@ -15,7 +15,7 @@ export interface IGetOrderDataError {
 
 export interface IGetOrderDataSuccess {
   readonly type: typeof GET_ORDER_SUCCESS;
-  readonly payload: number;
+  readonly payload: string;
 }
 
 export type TOrderActions =
@@ -31,10 +31,10 @@ const getOrderDataRequest = ():IGetOrderDataRequest => {
   };
 };
 
-const getOrderSuccess = (data:any):IGetOrderDataSuccess => {
+const getOrderSuccess = (data:string):IGetOrderDataSuccess => {
   return {
     type: GET_ORDER_SUCCESS,
-    payload: data.orders[0],
+    payload: data,
   };
 };
 
@@ -45,7 +45,7 @@ const orderError = (text:string):IGetOrderDataError => {
   };
 };
 
-const fetchOrder = (number:number) => {
+const fetchOrder = (number:string) => {
   return (dispatch:AppDispatch) => {
     dispatch(getOrderDataRequest);
     console.log("88888");
@@ -53,7 +53,7 @@ const fetchOrder = (number:number) => {
       .then(checkResponce)
       .then((data) => {
         console.log(data);
-        dispatch(getOrderSuccess(data));
+        dispatch(getOrderSuccess(data.orders[0]));
         console.log(getOrderSuccess(data));
       })
       .catch((error) => {

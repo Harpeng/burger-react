@@ -7,7 +7,7 @@ import {TOrderActions} from '../actions/order';
 import { IOrder } from "../type/data";
 
 export interface IOrderInitialState {
-  order: null | number ;
+  order: null | string ;
   orderRequest: boolean;
   orderError: boolean;
   orderSucces: boolean;

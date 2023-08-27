@@ -8,13 +8,13 @@ import styles from "./order-consist.module.css";
 import OrderItem from "../order-item/order-item";
 import { fetchOrder } from "../../services/actions/order";
 import React, {FC} from "react";
-import { IburgerInfo } from "../../services/type/data";
+import { IburgerInfo, IOrder } from "../../services/type/data";
 
 
 
  const OrderConsist:FC = () => {
 
-  const { number } = useParams() as any;
+  const { number } = useParams();
   const { id } = useParams();
 
 
@@ -40,7 +40,7 @@ import { IburgerInfo } from "../../services/type/data";
       return order;
     }
 
-    order = store.orderReducer.order as any;
+    order = store.orderReducer.order as never;
     if (order) {
       return order;
     }

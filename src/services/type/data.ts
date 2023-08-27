@@ -22,7 +22,7 @@ export interface IOrder {
     readonly _id: string,
     readonly name: string,
     readonly status: string,
-    readonly number: number[],
+    readonly number: string,
     readonly createdAt: string,
   }
 
