@@ -1,0 +1,46 @@
+.profileContainer {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  flex-direction: row;
+  gap: 60px;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+  margin-top: 120px;
+}
+
+.formContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 209px;
+  margin-top: 120px;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  height: 64px;
+  align-items: center;
+}
+
+.text {
+  height: 48px;
+  color: #8585ad;
+  opacity: 40%;
+}
+
+.buttonBlock {
+  display: flex;
+  justify-content: flex-end;
+}

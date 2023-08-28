@@ -1,0 +1,28 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 180px;
+}
+
+.button {
+    display: flex;
+    margin: 0 auto 80px auto;
+}
+
+.additionalActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.additionalActions:last-child {
+    margin-bottom: 0;
+}
+
+.link{
+    text-decoration: none;
+}

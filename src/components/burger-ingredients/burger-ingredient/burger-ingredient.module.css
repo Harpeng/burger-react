@@ -1,0 +1,31 @@
+.burgerIngredient {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  max-width: 272px;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.image {
+  max-width: 242px;
+  width: 100%;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  overflow: hidden;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #FFF;
+}
