@@ -1,20 +1,19 @@
 import React,{FC} from "react";
 import styles from "./burger-ingredients.module.css";
-import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientList from "./burger-ingredient-list/burger-ingredients-list";
-import { burgerPropTypes } from "../../utils/types";
 import { useDispatch, useSelector } from "../../services/hook";
 import {
   openIngredientDetails,
 } from "../../services/actions/ingredient-details";
 import { useInView } from "react-intersection-observer";
-import { useNavigate} from "react-router-dom";
 import { IburgerInfo } from "../../services/type/data";
+import { createSelector } from 'reselect'
 
 
 
 const BurgerIngredients: FC =  () =>  {
+
   const dataBurger = useSelector(
     (store) => store.burgerIngredientsReducer.dataBurger
   ); //получение ингредиентов с сервера

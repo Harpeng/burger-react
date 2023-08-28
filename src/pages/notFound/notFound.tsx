@@ -1,11 +1,11 @@
-import React from "react";
+import React, {FC} from "react";
 import { Link } from "react-router-dom";
 import styles from "./notFound.module.css";
 import {
     Button
   } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function NotFound() {
+const NotFound:FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
