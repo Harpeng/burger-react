@@ -13,9 +13,9 @@ const initialState:ICurrentIngredient  = {
 const ingredientDetailsReducer = (state = initialState, action:TCurrentIngredientActions):ICurrentIngredient => {
     switch(action.type) {
         case OPEN_INGREDIENT_MODAL: {
-            console.log(action.payload, "888")
+            console.log(action.data)
             return {
-                item: action.payload
+                item: action.data
             }
         }
         case CLOSE_INGREDIENT_MODAL: {

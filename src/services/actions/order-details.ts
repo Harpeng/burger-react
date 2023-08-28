@@ -1,7 +1,7 @@
 import {baseUrl, wsUrl} from '../../utils/utils';
 import {checkResponce} from '../../utils/api';
 import { getCookie } from '../../utils/cookie';
-import { refreshToken } from './auth.js';
+import { refreshToken } from './auth';
 import { AppDispatch } from '../type';
 import { IburgerInfo } from '../type/data';
 
@@ -116,24 +116,24 @@ const openOrderDetails = (orderId: Array<string>) => {
         .then((data) => {
           dispatch(getOrderDataSuccess(data));
         })
-        // .catch((err) => {
-        //   if (err.message === "jwt expired" || "jwt malformed") {
-        //     dispatch(refreshToken(getCookie("refreshToken")))
-        //       .then(() => {
-        //       fetch(`${baseUrl}/orders`, {
-        //         method: "POST",
-        //         headers: {
-        //           authorization: 'Bearer ' + getCookie("accessToken"),
-        //           "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({ ingredients: orderId}),
-        //       })
-        //       .then((data) => {
-        //         dispatch(getOrderDataSuccess(data));
-        //       })
-        //     })
-        //   }
-        // })
+        .catch((err) => {
+          if (err.message === "jwt expired" || "jwt malformed") {
+            dispatch(refreshToken(getCookie("refreshToken")))
+              .then(() => {
+              fetch(`${baseUrl}/orders`, {
+                method: "POST",
+                headers: {
+                  authorization: 'Bearer ' + getCookie("accessToken"),
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ingredients: orderId}),
+              })
+              .then((data) => {
+                dispatch(getOrderDataSuccess(data));
+              })
+            })
+          }
+        })
         .catch((error) => {
           dispatch(getOrderDataError(error));
         })

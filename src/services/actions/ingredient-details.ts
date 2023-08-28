@@ -3,7 +3,7 @@ import { IburgerInfo } from '../type/data';
 
 export interface IOpenIngredient {
   readonly type: typeof OPEN_INGREDIENT_MODAL;
-  readonly payload: IburgerInfo;
+  readonly data: IburgerInfo;
 }
 
 export interface ICloseIngredient {
@@ -12,11 +12,12 @@ export interface ICloseIngredient {
 
 export type TCurrentIngredientActions =
 | IOpenIngredient
-| ICloseIngredient;
+| ICloseIngredient
+;
 
 const openIngredientDetails = (item:IburgerInfo):IOpenIngredient => ({
   type: OPEN_INGREDIENT_MODAL,
-  payload: item,
+  data: item,
 });
 
 const closeIngredientDetails = ():ICloseIngredient => ({

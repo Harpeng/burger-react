@@ -1,4 +1,4 @@
-import React, {FC, FormEvent, ChangeEvent, MouseEvent} from "react";
+import React, {FC, FormEvent, ChangeEvent} from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./register.module.css";
 import { useDispatch, useSelector } from "../../services/hook";

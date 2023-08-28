@@ -10,8 +10,6 @@ import { fetchOrder } from "../../services/actions/order";
 import React, {FC} from "react";
 import { IburgerInfo, IOrder } from "../../services/type/data";
 
-
-
  const OrderConsist:FC = () => {
 
   const { number } = useParams();
